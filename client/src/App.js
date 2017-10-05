@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Login from "./pages/Login/Login.js";
+import Parent from "./pages/Parent/Parent.js";
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <Router>
+        <div>
+       <div className="navbar">
+              <img className="logo" src = "assets/logo.png" alt= "logo" />
+              <span className="chore">ChoreScore</span>           
+       </div>
+        <Route exact path="/" component={Login} />
+        <Route exact path="/parent" component={Parent} />
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      </Router>
     );
   }
 }

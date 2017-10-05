@@ -43,7 +43,7 @@ class Login extends Component {
 
     handleLogin=()=>{
         API.login(this.state.sinUsername,this.state.sinPassword,this.state.loginType)
-        .then(res => console.log("done"))
+        .then(res => console.log(res))
         .catch(err => console.log(err));
     };
 

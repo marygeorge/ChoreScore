@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
     // Gets the book with the given id
     login: function(userid,password,type) {
-      return axios.get("/api/login");
+      return axios.get("/api/login/"+userid+"/"+password+"/"+type);
     },
     // Deletes the book with the given id
    /* deleteBook: function(id) {

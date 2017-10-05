@@ -2,9 +2,9 @@ const router = require("express").Router();
 const path = require("path");
 
 
-router.route("/api/login").get((req,res)=>{
-    console.log("yes");  
-    res.redirect("http://google.com")
+router.route("/api/login/:username/:password/:type").get((req,res)=>{ 
+  console.log("\n username :"+req.params.username+"\n password :"+req.params.password+"\n type :"+req.params.type)
+   res.redirect("/parent");
 });
 
 // If no API routes are hit, send the React app

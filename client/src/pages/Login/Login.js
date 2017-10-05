@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import './Login.css';
-import Signup from "../../components/Login/Signup.js";
-import Signin from "../../components/Login/Signin.js";
+import {Signup, Signin} from "../../components/LoginForm";
+//import Signin from "../../components/LoginForm/Signin.js";
 import API from "../../utils/API";
 //import { Link } from "react-router-dom";
 

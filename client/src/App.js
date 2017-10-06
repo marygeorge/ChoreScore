@@ -9,10 +9,6 @@ class App extends Component {
     return (
       <Router>
         <div>
-       <div className="navbar">
-              <img className="logo" src = "assets/logo.png" alt= "logo" />
-              <span className="chore">ChoreScore</span>           
-       </div>
         <Route exact path="/" component={Login} />
         <Route exact path="/parent" component={Parent} />
         </div>

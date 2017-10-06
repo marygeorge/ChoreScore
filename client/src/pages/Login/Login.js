@@ -14,8 +14,9 @@ class Login extends Component {
           switch(event.target.id){
               case "parentFirstName": this.setState({supFirstName:event.target.value});break;
               case "parentLastName":this.setState({supLastName:event.target.value});break;
-              case "whoParent":this.setState({supEmail:event.target.value});break;
-              case "whoChild":this.setState({supUsername:event.target.value});break;
+              case "parentEmail":this.setState({supEmail:event.target.value});break;
+              case "parentUserName":this.setState({supUsername:event.target.value});break;
+              case "parentPassword":this.setState({supPassword:event.target.value});break;
           }
       };
 
@@ -36,7 +37,7 @@ class Login extends Component {
               username:this.state.supUsername,
               password:this.state.supPassword,           
           };
-        API.Signup(data)
+        API.signUp(data)
         .then(res => console.log("done"))
         .catch(err => console.log(err));
     };

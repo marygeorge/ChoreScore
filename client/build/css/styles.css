@@ -1,0 +1,879 @@
+@charset "UTF-8";
+/* CSS Document */
+
+* {
+	margin: 0 auto;
+	padding: 0 auto;
+}
+
+@font-face {
+    font-family: Universe;
+    src: url(../font/UniversLTStd-Bold.otf);
+}
+
+.logo {
+    margin-top: 10px;
+    margin-left: 25px;
+    position: absolute;
+}
+
+.chore {
+    font-size: 30px;
+    font-family: Universe;
+    color: #c2e8fb;
+    position: absolute;
+    margin-top: 42px;
+    margin-left: 90px;
+}
+
+.blackBar {
+    width: 100%;
+    background-color: black;
+    height: 65px;
+}
+
+.blueBar {
+    width: 100%;
+    background-color: #c2e8fb;
+    height: 15px;
+}
+
+.indexImg {
+    width: 100%;
+    margin-top: -20px;
+}
+
+.welcome {
+    font-size: 17px;
+    color: white;
+    font-family: Universe;
+    width: 400px;
+}
+
+.welcomeDiv {
+    margin-top: 490px;
+    margin-left: 30px;
+    position: absolute;
+}
+
+.formParams {
+    position: absolute;
+    width: 380px;
+    margin-top: 50px;
+}
+
+.signUpToday {
+    font-size: 25px;
+    color: Black;
+    font-family: Universe;
+}
+
+.parentFirstName {
+    font-size: 18px;
+    font-family: Universe;
+    color: white;
+    background: black;
+    width: 337px;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+#parentFirstName {
+    color: white;
+    padding-top: 5px;
+}
+
+.parentLastName {
+    font-size: 18px;
+    font-family: Universe;
+    color: white;
+    background: black;
+    width: 337px;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+#parentLastName {
+    color: white;
+    padding-top: 5px;
+}
+
+.parentEmail {
+    font-size: 18px;
+    font-family: Universe;
+    color: white;
+    background: black;
+    width: 337px;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+#parentEmail {
+    color: white;
+    padding-top: 5px;
+}
+
+.parentUserName {
+    font-size: 18px;
+    font-family: Universe;
+    color: white;
+    background: black;
+    width: 158.5px;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+#parentUserName {
+    color: white;
+    padding-top: 10px;
+}
+
+.parentPassword {
+    font-size: 18px;
+    font-family: Universe;
+    color: white;
+    background: black;
+    width: 158.5px;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    margin-top: 15px;
+    margin-left: 15px
+}
+
+#parentPassword {
+    color: white;
+    padding-top: 10px;
+}
+
+.signUp {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    font-family: Universe;
+    margin-top: 10px;
+}
+
+
+.formParams2 {
+    position: absolute;
+    width: 380px;
+    margin-top: 400px;
+}
+
+
+input[type=checkbox]:not(old),
+input[type=radio   ]:not(old){
+  width: 28px;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+}
+
+input[type=checkbox]:not(old) + label,
+input[type=radio   ]:not(old) + label{
+  display: inline-block;
+  margin-left: -28px;
+  margin-top:  15px;
+  padding-left: 35px;
+  background: url("../assets/radioChange.png") no-repeat 0 0;
+  line-height: 31px;
+}
+
+input[type=checkbox]:not(old):checked + label{
+    background-position: 0 -38px;
+  } 
+  
+  input[type=radio]:not(old):checked + label{
+    background-position: 0 -48px;
+  }
+
+  .radioOne {
+    position: absolute;
+}
+
+.radioTwo {
+    position: relative;
+    margin-left: 100px;
+}
+
+.logInForm {
+    font-size: 25px;
+    color: Black;
+    font-family: Universe;
+}
+
+.userName {
+    font-size: 18px;
+    font-family: Universe;
+    color: white;
+    background: black;
+    width: 337px;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+#userName {
+    color: white;
+    padding-top: 5px;
+}
+
+.password {
+    font-size: 18px;
+    font-family: Universe;
+    color: white;
+    background: black;
+    width: 337px;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+#password {
+    color: white;
+    padding-top: 5px;
+}
+
+
+.logIn {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    font-family: Universe;
+    margin-top: 10px;
+}
+
+.footerCon {
+    position: relative;
+    z-index: -20;
+    margin-top: 17px;
+    float: left;
+    height: 100%;
+    width: 100%;
+}
+
+.footerBlack {
+    width: 100%;
+    background-color: black;
+    height: 65px;
+    position: absolute;
+    bottom: 0;
+}
+
+.footerBlue {
+    width: 100%;
+    background-color: #c2e8fb;
+    height: 15px;
+    position: absolute;
+    bottom: 0;
+}
+
+.footer {
+    font-size: 12px;
+    color: white;
+}
+
+
+/* Parent Main Page  */
+
+.parentNav {
+    font-size: 30px;
+    font-family: Universe;
+    color: white;
+    position: absolute;
+    margin-top: 42px;
+    margin-left: 90px;
+}
+
+.logOut {
+    font-size: 18px;
+    font-weight: normal;
+    margin-left: 8px;
+    color: white;
+    text-decoration: none;
+    font-family: Universe;
+}
+
+.dropDownBox {
+    width: 197px;
+    height: 40px;
+    background-color: white;
+    margin-top: 12px;
+    border-radius: 0px;
+}
+
+.dropdown-menu {
+    font-family: Universe;
+}
+
+.kids {
+    font-size: 25px;
+    font-weight: normal;
+    font-family: Universe;
+}
+
+.changeKids {
+    margin-left: 25px;
+    padding-top: 5px;
+}
+
+.dropArrow {
+    float: right;
+    margin-top: -30px;
+    margin-right: 15px;
+}
+
+.calendarParent {
+    background-color: black;
+    height: 470px;
+}
+
+.rewardsParent {
+    background-color: #c2e8fb;
+    height: 470px;
+}
+
+.theDay {
+    font-size: 38px;
+    color: white;
+    position: absolute;
+    font-family: Universe;
+    margin-left: 170px;
+    margin-top: 40px;
+}
+
+.theDate {
+    font-size: 30px;
+    color: #c2e8fb;
+    position: absolute;
+    font-family: Universe;
+    margin-left: 50px;
+    margin-top: 90px;
+}
+
+.calendarC {
+    margin-left: 190px;
+    margin-top: 100px;
+}
+
+.cArrowL {
+    position: absolute;
+    margin-top: 180px;
+    margin-left: 90px;
+}
+
+.cArrowR {
+    position: absolute;
+    margin-top: 180px;
+    margin-left: 25px;
+}
+
+.choresDone {
+    font-size: 75px;
+    color: black;
+    font-family: Universe;
+    position: absolute;
+    margin-top: 225px;
+    margin-left: 290px;
+    z-index: 20;
+}
+
+.col-lg-6 {
+    margin-top: -22px;
+}
+
+.choreListName {
+    font-size: 38px;
+    color: black;
+    font-family: Universe;
+    position: absolute;
+    z-index: 40;
+    margin-top: -420px;
+
+}
+
+.choreListItems {
+    font-size: 25px;
+    color: black;
+    font-family: Universe;
+    position: absolute;
+    z-index: 40;
+    margin-top: -340px;
+
+}
+
+.redCheck {
+    position: absolute;
+    z-index: 50;
+    margin-top: -370px;
+    margin-left: 455px;
+}
+
+.yellowCheck {
+    position: absolute;
+    z-index: 50;
+    margin-top: -285px;
+    margin-left: 180px;
+}
+
+.greenCheck {
+    position: absolute;
+    z-index: 50;
+    margin-top: -200px;
+    margin-left: 230px;
+}
+
+.addChoresBtn {
+    position: absolute;
+    z-index: 50;
+    margin-top: -100px;
+    margin-left: 500px;
+}
+
+.addChoresParent {
+    font-size: 20px;
+    color: black;
+    position: absolute;
+    font-family: Universe;
+    z-index: 50;
+    margin-top: -55px;
+    margin-left: 390px;
+}
+
+.rewardsTitleParent {
+    font-size: 38px;
+    color: black;
+    position: absolute;
+    font-family: Universe;
+    margin-left: 170px;
+    margin-top: 40px;
+}
+
+.pointsTotalParent {
+    font-size: 30px;
+    color: black;
+    position: absolute;
+    font-family: Universe;
+    margin-left: 50px;
+    margin-top: 90px;
+}
+
+.rewardOne {
+    font-size: 30px;
+    color: #af5c60;
+    font-family: Universe;
+    position: absolute;
+    text-align: center;
+    margin-top: 130px;
+    margin-left: 270px;
+}
+
+.moveDown {
+    margin-top: 21px;
+}
+
+.numFix {
+    font-size: 50px;
+}
+
+.rewardTwo {
+    font-size: 30px;
+    color: white;
+    font-family: Universe;
+    position: absolute;
+    text-align: center;
+    margin-top: 240px;
+    margin-left: 270px;
+}
+
+.numFix2 {
+    font-size: 50px;
+}
+
+.rewardsScroll {
+    margin-top: 350px;
+    margin-left: 330px;
+}
+
+.addRewardsBtn {
+    position: absolute;
+    z-index: 50;
+    margin-top: -40px;
+    margin-left: 550px;
+}
+
+.addRewardsParent {
+    font-size: 20px;
+    color: black;
+    position: absolute;
+    font-family: Universe;
+    z-index: 50;
+    margin-top: px;
+    margin-left: 420px;
+}
+
+.addChoresTitle {
+    font-size: 38px;
+    color: black;
+    font-family: Universe;
+    position: absolute;
+    z-index: 40;
+    margin-top: -420px;
+
+}
+
+.choresName {
+    font-size: 30px;
+    color: #c2e8fb
+}
+
+.moveFormUp {
+    margin-top: -350px;
+}
+
+.choreName {
+    font-size: 18px;
+    font-family: Universe;
+    color: white;
+    background: black;
+    width: 337px;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+#choreName {
+    color: white;
+    padding-top: 5px;
+}
+
+.selectPointAmount {
+    font-size: 18px;
+    font-family: Universe;
+    color: white;
+    background: black;
+    width: 337px;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+#selectPointAmount {
+    color: white;
+    padding-top: 5px;
+}
+
+.dueDate {
+    font-size: 18px;
+    font-family: Universe;
+    color: white;
+    background: black;
+    width: 337px;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+#dueDate {
+    color: white;
+    padding-top: 5px;
+}
+
+.timeBox {
+    font-size: 18px;
+    font-family: Universe;
+    color: white;
+    background: black;
+    width: 158.5px;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+#timeBox {
+    color: white;
+    padding-top: 5px;
+}
+
+.schedule {
+    font-size: 18px;
+    font-family: Universe;
+    color: white;
+    background: black;
+    width: 158.5px;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    margin-top: 15px;
+    margin-left: 15px
+}
+
+#schedule {
+    color: white;
+    padding-top: 5px;
+}
+
+.submitChores {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    font-family: Universe;
+    margin-top: 15px;
+}
+
+.choreBar {
+    width: 100%;
+    background-color: #c2e8fb;
+    height: 470px;
+}
+
+.backMainBtn {
+    position: absolute;
+    z-index: 50;
+    margin-top: 20px;
+}
+
+.backMainParent {
+    font-size: 20px;
+    color: black;
+    position: absolute;
+    font-family: Universe;
+    z-index: 50;
+    margin-left: -130px;
+    margin-top: 70px;
+}
+
+.choreItems {
+    font-size: 25px;
+    color: black;
+    font-family: Universe;
+    position: absolute;
+    z-index: 40;
+    margin-top: 70px;
+    margin-left: 50px;
+}
+
+.redCheckChoreP {
+    position: absolute;
+    z-index: 50;
+    margin-top: 50px;
+    margin-left: 500px;
+}
+
+.yellowCheckChoreP {
+    position: absolute;
+    z-index: 50;
+    margin-top: 130px;
+    margin-left: 225px;
+}
+
+.greenCheckChoreP {
+    position: absolute;
+    z-index: 50;
+    margin-top: 210px;
+    margin-left: 275px;
+}
+
+/* Add rewards Page */
+
+.addRewardsTitle {
+    font-size: 38px;
+    color: black;
+    font-family: Universe;
+    position: absolute;
+    z-index: 40;
+    margin-top: -420px;
+
+}
+
+.rewardName {
+    font-size: 18px;
+    font-family: Universe;
+    color: white;
+    background: black;
+    width: 337px;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+#rewardName {
+    color: white;
+    padding-top: 5px;
+}
+
+.amazonWishLists {
+    font-size: 18px;
+    font-family: Universe;
+    color: white;
+    background: black;
+    width: 337px;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+#amazonWishLists {
+    color: white;
+    padding-top: 5px;
+}
+
+.amountPoints {
+    font-size: 18px;
+    font-family: Universe;
+    color: white;
+    background: black;
+    width: 337px;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+#amountPoints {
+    color: white;
+    padding-top: 5px;
+}
+
+.submitRewards {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    font-family: Universe;
+    margin-top: 15px;
+}
+
+.availableRewards {
+    width: 100%;
+    background-color: #c2e8fb;
+    height: 550px;
+}
+
+.availableTitle {
+    font-size: 38px;
+    color: black;
+    font-family: Universe;
+    position: absolute;
+    z-index: 40;
+    margin-top: 70px;
+    margin-left: 50px;
+}
+
+.rewardItems {
+    font-size: 25px;
+    color: black;
+    font-family: Universe;
+    position: absolute;
+    z-index: 40;
+    margin-top: 150px;
+    margin-left: 50px;
+}
+
+.riNum {
+    font-size: 35px;
+}
+
+.rewardsNum {
+    position: absolute;
+    color: white;
+    margin-left: 400px;
+    margin-top: 77px;
+}
+
+.itemOne {
+    color: #af5c60;
+}
+
+li {
+    list-style: none;
+}
+
+.bought {
+    font-size: 38px;
+    color: white;
+    position: absolute;
+    font-family: Universe;
+    margin-left: 170px;
+    margin-top: 40px;
+}
+
+.rewardsTitle {
+    font-size: 30px;
+    color: #c2e8fb;
+    position: absolute;
+    font-family: Universe;
+    margin-left: 50px;
+    margin-top: 90px;
+}
+
+.itemBought {
+    font-size: 40px;
+    color: black;
+    font-family: Universe;
+    position: absolute;
+    margin-top: 225px;
+    margin-left: 240px;
+    z-index: 20;
+}
+
+.earned {
+    font-size: 25px;
+    color: #c2e8fb;
+    font-family: Universe;
+    position: absolute;
+    margin-top: 225px;
+    margin-left: 240px;
+    z-index: 20;
+}

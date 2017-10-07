@@ -30,6 +30,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
         },
+        TaskStatus: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
     });
 
     Tasks.associate = function (models) {
@@ -38,6 +42,7 @@ module.exports = function (sequelize, DataTypes) {
                 foreignKey:
                 { allowNull: false }
             });
+            
         
     };
     Tasks.associate = function (models) {

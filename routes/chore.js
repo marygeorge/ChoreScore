@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const path = require("path");
+var appDir = path.dirname(require.main.filename);
 const db = require("../models");
 
 
@@ -13,9 +14,16 @@ router.route("/api/login/:username/:password/:type").get((req,res)=>{
                 ParentPassword: req.params.password
             }
         }).then(function(result) {
-            console.log("parent");
-           // res.json(result);
-             res.redirect("/parent");
+            console.log(result.dataValues);
+            res.json(result.dataValues);
+            // console.log(path.join(appDir+'/src/pages/Parent/Parent.js'));
+            
+            // res.send({redirect:path.join(appDir+'/src/pages/Parent/Parent.js')});
+            // res.redirect(path.join(appDir+'/src/pages/Parent/Parent.js'));
+            // res.writeHead(302, {
+            //   Location: '/Parent'
+            // });
+            // res.end();
         });
   }
   if(req.params.type==="child")
@@ -26,7 +34,7 @@ router.route("/api/login/:username/:password/:type").get((req,res)=>{
                 ChildPassword: req.params.password
             }
         }).then(function(result) {
-            console.log("child found");
+            console.log(result);
            // res.json(result);
              res.redirect("/childpage");
         });
@@ -197,11 +205,7 @@ router.use(function(req, res) {
     res.sendFile(path.join(__dirname, "../client/build/index.html"));
   });
 
-<<<<<<< HEAD
-  module.exports = router;
-=======
   module.exports = router;
 
 
 
->>>>>>> d949cbfeb4971a40aa42f1bdf7ca4353cfc9e393

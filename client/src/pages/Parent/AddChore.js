@@ -8,8 +8,32 @@ import { Link } from "react-router-dom";
 
 class Parent extends Component {
     state = {
+        choreName:"",chorePoint:"",choreDue:"",choreTimeBox:"",choreSchedule:"",
         chores:[{taskName:"Do the dishes",RedeemStatus:"undone"},{taskName:"Take out the trash",RedeemStatus:"done"}]
       
+    };
+    handleChange=event=>{
+        switch(event.target.id){
+            case "choreName":this.setState({choreName:event.target.value});break;
+            case "selectPointAmount":this.setState({chorePoint:event.target.value});break;
+            case "dueDate":this.setState({choreDue:"parent"});break;
+            case "timeBox":this.setState({choreTimeBox:"child"});break;
+            case "schedule":this.setState({choreSchedule:"child"});break;
+        }
+    };
+    handleSubmit=()=>{
+       console.log(this.state.choreName);
+       const chore={
+       parentid:"seccion Id",
+       childId:"will be provide from dropdown ",
+       taskname:this.state.choreName,
+       taskdescription:"",
+       taskpoints:this.state.chorePoint,
+       startdate:this.state.choreTimeBox,
+       tasktype:this.state.choreSchedule,
+       mandatory:"not available"
+       };
+       API.addChore(chore).then((res)=>{})
     };
     render() {
     return (
@@ -33,7 +57,7 @@ class Parent extends Component {
 
         </div>
         <div className="col-sm-6 chore-form">
-        <AddForm />
+        <AddForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
         </div>
         </div>
 

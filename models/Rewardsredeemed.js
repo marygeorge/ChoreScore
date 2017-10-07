@@ -25,16 +25,13 @@ module.exports = function (sequelize, DataTypes) {
                 foreignKey:
                 { allowNull: false }
             });
-        
-    };
-    Rewardsredeemed.associate = function (models) {
         Rewardsredeemed.belongsTo(models.Child,
             {
                 foreignKey:
                 { allowNull: false }
             });
-        
     };
+   
 
     return Rewardsredeemed;
 };

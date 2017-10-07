@@ -12,5 +12,8 @@ export default {
     // Saves a book to the database
     signUp: function(userData) {
       return axios.post("/api/signUp", userData);
+    },
+    addChore: function(userData) {
+      return axios.post("/api/addtask", userData);
     }
   };

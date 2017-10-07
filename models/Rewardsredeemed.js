@@ -31,14 +31,7 @@ module.exports = function (sequelize, DataTypes) {
                 { allowNull: false }
             });
     };
-    // Rewardsredeemed.associate = function (models) {
-    //     Rewardsredeemed.belongsTo(models.Child,
-    //         {
-    //             foreignKey:
-    //             { allowNull: false }
-    //         });
-        
-    // };
+   
 
     return Rewardsredeemed;
 };

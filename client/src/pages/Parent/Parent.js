@@ -1,10 +1,16 @@
 import React, { Component } from "react";
 import './Parent.css';
 import API from "../../utils/API";
-import {KidDropDown} from "../../components/KidDropDown/KidDropDown.js"
-//import { Link } from "react-router-dom";
+import {KidDropDown} from "../../components/KidDropDown/KidDropDown.js";
+import {Chore} from "../../components/Chore/Chore.js"
+import {Reward} from "../../components/Reward/Reward.js"
+import { Link } from "react-router-dom";
 
 class Parent extends Component {
+    state = {
+        chores:[{taskName:"Do the dishes",RedeemStatus:"undone"},{taskName:"Take out the trash",RedeemStatus:"done"}],
+        rewards:[{RewardName:"soccer ball",RewardPoints:"500"},{RewardName:"iphone",RewardPoints:"1000"}],
+    };
     render() {
     return (
         <div>
@@ -18,26 +24,44 @@ class Parent extends Component {
          <KidDropDown  />
        </div>
         </div>
-        </div>
 
+        </div>
+       
+       
         <div className="row">
         <div className="col-sm-6">
-        <div className="calender">
-            <h1>Ctober 14th</h1>
-        </div>         
-        <div className="reward-list">
-        Soccer Ball <span className="badge">500</span><br/>
-        Iphone X <span className="badge">1000</span>
-        </div>
+           <div className="calender">
+             <b>October 14th</b>
+           </div> 
+
+           <div className="reward-list">
+           {this.state.rewards.map(reward=>
+            <Reward title={reward.RewardName} points={reward.RewardPoints} />
+            )}
+            <div className="link-btn text-center"> 
+             <Link to="/parent" >
+              Add Reward
+             <img src = "assets/addChoresBtn.png" alt="add chores button" />
+             </Link> 
+             </div>  
+         </div>
         </div>
 
+
+
         <div className="col-sm-6 kid-chores">
-        Walk your little sister to the bus stop<img src = "assets/redCheck.png" alt="red check" /><br/>
-        Do the dishes <img src = "assets/yellowCheck.png" alt="yellow check" />
-                      <img src = "assets/redX.png" alt="red X" /><br/>
-        Take out the trash<img  src = "assets/greenCheck.png" alt="green check" /><br/>
+            {this.state.chores.map(chore=>
+          <Chore title={chore.taskName} status={chore.RedeemStatus} />
+            )}
+            <div className="link-btn text-right">  
+            <Link to="/parent/addchore" >
+            Add Chores
+            <img src = "assets/addChoresBtn.png" alt="add chores button" />
+            </Link>        
+            </div>
         </div>
         </div>
+        
 
 
         </div>

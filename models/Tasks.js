@@ -43,16 +43,16 @@ module.exports = function (sequelize, DataTypes) {
                 { allowNull: false }
             });
             
-        
-    };
-    Tasks.associate = function (models) {
         Tasks.belongsTo(models.Child,
             {
                 foreignKey:
                 { allowNull: false }
             });
-        
     };
+    // Tasks.associate = function (models) {
+        
+        
+    // };
 
     return Tasks;
 };

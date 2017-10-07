@@ -18,21 +18,14 @@ app.use(bodyParser.json());
 app.use(routes);
 // Send every request to the React app
 // Define any API routes before this runs
-app.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
-
-<<<<<<< HEAD
-=======
+// app.get("*", function(req, res) {
+//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
+// });
 
 
->>>>>>> 12d12265ae76582d69381429d18955583cda3283
+
 db.sequelize.sync({}).then(function() {
   app.listen(PORT, function() {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
   });
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> 12d12265ae76582d69381429d18955583cda3283

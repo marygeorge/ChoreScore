@@ -39,7 +39,7 @@ class Parent extends Component {
             <Reward title={reward.RewardName} points={reward.RewardPoints} />
             )}
             <div className="link-btn text-center"> 
-             <Link to="/parent" >
+             <Link to="/parent/addreward" >
               Add Reward
              <img src = "/assets/addChoresBtn.png" alt="add chores button" />
              </Link> 

@@ -1,0 +1,50 @@
+.kid-dd{
+  margin: 10px 20px 5px 5px;
+}
+
+.kid-dd button{
+  padding: 0px 70px;
+  font-size: 1.7em;
+}
+
+.chore-form{
+  background-color: #ffffff;
+  padding: 30px 10px;
+}
+
+.kid-chores{
+  background-color: #ffffff;
+  padding: 50px;
+  font-size: 2em;
+}
+
+.calender{
+  background-color: #000000;
+}
+
+
+.link-btn a{
+  font-weight: bolder;
+  color:#000000;
+}
+
+.chore-list{
+  padding: 50px;
+  font-size: 2em;
+}
+
+.reward-list{
+  padding: 50px;
+  font-size: 2em;
+  background-color: #c2e8fb;
+}
+
+.chore-item{
+  background-color: #fdfdfd;
+  box-shadow: 2px 2px 10px #777777;
+}
+
+.reward-item{
+  background-color: #fcf3e3;
+  box-shadow: 2px 2px 10px #777777;
+}

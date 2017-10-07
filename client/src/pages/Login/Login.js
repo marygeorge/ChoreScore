@@ -37,7 +37,6 @@ class Login extends Component {
               username:this.state.supUsername,
               password:this.state.supPassword,           
           };
-          console.log(data);
         API.signUp(data)
         .then(res => console.log("done"))
         .catch(err => console.log(err));
@@ -51,6 +50,14 @@ class Login extends Component {
 
     render() {
     return (
+        <div>
+
+        <div className="navbar">
+        <img className="logo" src = "assets/logo.png" alt= "logo" />
+        <span className="chore">ChoreScore</span>                       
+        </div>
+
+
     <div className="login-wraper">
         <div className="row">
             <div className="col-lg-8">
@@ -69,6 +76,7 @@ class Login extends Component {
               <Signin handleChange={this.handleSigninChange} handleSubmit={this.handleLogin} />
             </div>
         </div>
+    </div>
     </div>
 );
     }

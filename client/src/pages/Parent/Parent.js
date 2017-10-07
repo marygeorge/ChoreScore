@@ -41,7 +41,7 @@ class Parent extends Component {
             <div className="link-btn text-center"> 
              <Link to="/parent" >
               Add Reward
-             <img src = "assets/addChoresBtn.png" alt="add chores button" />
+             <img src = "/assets/addChoresBtn.png" alt="add chores button" />
              </Link> 
              </div>  
          </div>
@@ -51,12 +51,12 @@ class Parent extends Component {
 
         <div className="col-sm-6 kid-chores">
             {this.state.chores.map(chore=>
-          <Chore title={chore.taskName} status={chore.RedeemStatus} />
+          <Chore type="parent" title={chore.taskName} status={chore.RedeemStatus} />
             )}
             <div className="link-btn text-right">  
             <Link to="/parent/addchore" >
             Add Chores
-            <img src = "assets/addChoresBtn.png" alt="add chores button" />
+            <img src = "/assets/addChoresBtn.png" alt="add chores button" />
             </Link>        
             </div>
         </div>

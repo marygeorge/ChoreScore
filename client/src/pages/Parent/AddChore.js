@@ -49,6 +49,10 @@ class AddChore extends Component {
        this.setState({selectedKidName:event.target.value});
        API.allChildChores(event.target.id).then(res=>console.log("this.setState({chores:res})"));
      };
+     handleChoreStatus=(event)=>{ 
+        const status={newstatus:event.target.value}
+     API.setChoreStatus(status).then(res=>console.log(res));
+   };
     render() {
     return (
         <div>
@@ -81,7 +85,7 @@ class AddChore extends Component {
         <div className="row">
         <div className="col-sm-10 chore-list">
              {this.state.chores.map(chore=>
-             <Chore key={chore.taskName} title={chore.taskName} status={chore.RedeemStatus} />
+             <Chore key={chore.taskName} handleStatus={this.handleChoreStatus}  title={chore.taskName} status={chore.RedeemStatus} />
               )}
             </div>
         <div className="col-sm-2">

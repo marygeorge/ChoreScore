@@ -56,3 +56,12 @@ input[type=button]{
   padding:0;
 }
 
+li .text-add-kid-btn{
+  font-size: 1.2em;
+  background:none;
+  background-color:none;
+  border:none;
+  margin:0;
+  padding:0px 0px 0px 15px;
+}
+

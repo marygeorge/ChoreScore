@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 class Parent extends Component {
     state = {
         selectedKidid:"",selectedKidName:"",
+        rewardName:"",amazonList:"",points:"",
         rewards:[{RewardName:"soccer ball",RewardPoints:"500"},{RewardName:"iphone",RewardPoints:"1000"}],
         kids:[{childName:"Alex",childid:"1"},{childName:"Mary",childid:"2"},{childName:"Lauren",childid:"3"}] 
     };
@@ -19,7 +20,25 @@ class Parent extends Component {
         this.setState({selectedKidid:event.target.id});
         this.setState({selectedKidName:event.target.value});
         API.allChildChores(event.target.id).then(res=>console.log("this.setState({chores:res})"));
+        API.allReward(event.target.id).then(res=>console.log("this.setState({rewards:res})"));
       };
+      handleChange=event=>{
+        switch(event.target.id){
+            case "rewardName":this.setState({rewardName:event.target.value});break;
+            case "amazonWishList":this.setState({amazonList:event.target.value});break;
+            case "points":this.setState({points:event.target.value});break;
+        }
+        console.log("got it")
+    };
+    handleSubmit=()=>{
+        const reward={
+        parentid:"seccion Id",
+        rewardname:this.state.rewardName,
+        rewarddescription:this.state.amazonList,
+        rewardpoints:this.state.points
+        };
+        API.addReward(reward).then((res)=>{console.log("done")});
+     };
     render() {
     return (
         <div>
@@ -35,6 +54,8 @@ class Parent extends Component {
         </div>
         </div>
 
+        <div className="text-center"> <h2> {this.state.selectedKidName} </h2></div>
+
         <div className="row">
         <div className="col-sm-6 calender">
 
@@ -42,7 +63,7 @@ class Parent extends Component {
 
         </div>
         <div className="col-sm-6 chore-form">
-        <AddForm />
+        <AddForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
         </div>
         </div>
 

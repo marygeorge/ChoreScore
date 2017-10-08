@@ -5,6 +5,12 @@ export default {
     login: function(userid,password,type) {
       return axios.get("/api/login/"+userid+"/"+password+"/"+type);
     },
+    allKids: function(parentid) {
+      return axios.get("/api/childlist/"+parentid);
+    },
+    allChildChores: function(childid) {
+      return axios.get("/api/gettasks/"+childid);
+    },
     // Deletes the book with the given id
    /* deleteBook: function(id) {
       return axios.delete("/api/books/" + id);

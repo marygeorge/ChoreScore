@@ -48,3 +48,11 @@ input[type=button]{
   color: #c2e8fb;
 }
 
+.text-btn{
+  background:none;
+  background-color:none;
+  border:none;
+  margin:0;
+  padding:0;
+}
+

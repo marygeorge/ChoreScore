@@ -8,9 +8,18 @@ import { Link } from "react-router-dom";
 
 class Parent extends Component {
     state = {
+        selectedKidid:"",selectedKidName:"",
         rewards:[{RewardName:"soccer ball",RewardPoints:"500"},{RewardName:"iphone",RewardPoints:"1000"}],
-      
+        kids:[{childName:"Alex",childid:"1"},{childName:"Mary",childid:"2"},{childName:"Lauren",childid:"3"}] 
     };
+    componentDidMount(){
+        API.allKids("sessionid").then(res=>console.log("this.setState({kids:res});"));
+    };
+    handleKidChange=(event)=>{
+        this.setState({selectedKidid:event.target.id});
+        this.setState({selectedKidName:event.target.value});
+        API.allChildChores(event.target.id).then(res=>console.log("this.setState({chores:res})"));
+      };
     render() {
     return (
         <div>
@@ -21,7 +30,7 @@ class Parent extends Component {
         <span className="chore">ChoreScore</span>  
         </div>
         <div className="col-sm-6">
-         <KidDropDown  />
+         <KidDropDown  kids={this.state.kids} handleKidChange={this.handleKidChange} />
        </div>
         </div>
         </div>

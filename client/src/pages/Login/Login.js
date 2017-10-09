@@ -46,7 +46,8 @@ class Login extends Component {
         API.login(this.state.sinUsername,this.state.sinPassword,this.state.loginType)
         .then(res => {
             console.log(res.data);
-            window.location='./Parent';
+            // sessionStorage.setItem
+            window.location='./Parent/'+res.data.username;
         })
         .catch(err => console.log(err));
     };

@@ -136,7 +136,7 @@ router.route("/api/gettasks/:childid/").get((req,res)=>{
       });
 });
 // pull up all the rewards.
-router.route("/api/getreward/:childid").get((req,res)=>{ 
+router.route("/api/getrewardChild/:childid").get((req,res)=>{ 
   db.Child.findOne({
             where:{
                 ChildId:req.params.childid,
@@ -152,6 +152,19 @@ router.route("/api/getreward/:childid").get((req,res)=>{
               res.json(result);
             });
         });
+});
+
+router.route("/api/getAllRewards/:parentid").get((req,res)=>{ 
+  
+          db.Rewards.findAll({
+            where:{
+              ParentId:req.params.parentid,
+            }
+           }).then(function(result) {
+              console.log(result);
+              res.json(result);
+            });
+
 });
 
 // list of all kids

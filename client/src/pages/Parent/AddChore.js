@@ -6,11 +6,40 @@ import {Chore} from "../../components/Chore/Chore.js"
 import {AddForm} from "../../components/Chore/AddForm.js"
 import { Link } from "react-router-dom";
 
+let taskname='';
+let points=0;
 class Parent extends Component {
     state = {
-        chores:[{taskName:"Do the dishes",RedeemStatus:"undone"},{taskName:"Take out the trash",RedeemStatus:"done"}]
-      
+        chores:[{}]
+        
     };
+
+    // set chores: didMount...
+
+    handleChoreChange=(event)=>{
+        switch(event.target.id){
+              case "choreName": taskname=event.target.value;break;
+              case "selectPointAmount": points=event.taget.value;break;
+            //   case "choreName": this.setState({newchore.taskname:event.target.value});break;
+            //   case "parentLastName":this.setState({supLastName:event.target.value});break;
+            //   case "parentEmail":this.setState({supEmail:event.target.value});break;
+            //   case "parentUserName":this.setState({supUsername:event.target.value});break;
+            //   case "parentPassword":this.setState({supPassword:event.target.value});break;
+          }
+    }
+
+ handleAddChore=()=>{
+        API.addChores(taskname)
+        .then(res => {
+            console.log(res.data);
+            // sessionStorage.setItem
+            window.location='./Parent/'+res.data.username;
+        })
+        .catch(err => console.log(err));
+    };
+
+
+
     render() {
     return (
         <div>
@@ -33,7 +62,7 @@ class Parent extends Component {
 
         </div>
         <div className="col-sm-6 chore-form">
-        <AddForm />
+        <AddForm handleChange={this.handleChoreChange}  handleSubmit={this.handleAddChore} />
         </div>
         </div>
 

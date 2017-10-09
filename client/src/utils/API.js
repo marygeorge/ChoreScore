@@ -5,6 +5,10 @@ export default {
     login: function(userid,password,type) {
       return axios.get("/api/login/"+userid+"/"+password+"/"+type);
     },
+    //addChores
+    addChores: function(parentid,childid,name,desc,date,type,points) {
+      return axios.post("/api/addreward"+parentid+"/"+childid+"/"+type);
+    },
     // Deletes the book with the given id
    /* deleteBook: function(id) {
       return axios.delete("/api/books/" + id);

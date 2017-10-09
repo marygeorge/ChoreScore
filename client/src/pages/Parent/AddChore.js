@@ -5,14 +5,18 @@ import {KidDropDown} from "../../components/KidDropDown/KidDropDown.js";
 import {Chore} from "../../components/Chore/Chore.js";
 import {AddForm} from "../../components/Chore/AddForm.js";
 import { Link } from "react-router-dom";
+import Calendar from 'react-calendar';
 
 class AddChore extends Component {
     state = {
+        date: new Date(),
         selectedKidid:"",selectedKidName:"",
         choreName:"",chorePoint:"",choreDue:"",choreTimeBox:"",choreSchedule:"",
         chores:[{taskName:"Do the dishes",RedeemStatus:"undone"},{taskName:"Take out the trash",RedeemStatus:"done"}],
         kids:[{childName:"Alex",childid:"1"},{childName:"Mary",childid:"2"},{childName:"Lauren",childid:"3"}]  
     };
+
+    onChange = date => this.setState({ date });
 
     componentDidMount(){
         API.allKids("sessionid").then(res=>console.log("this.setState({kids:res});"));
@@ -72,9 +76,12 @@ class AddChore extends Component {
        
 
         <div className="row">
-        <div className="col-sm-6 calender">
-
-
+        <div className="col-sm-6 calendar">
+        <h2> {this.state.date.toString().substr(0,16)}</h2>
+        <div className="calbox">
+              
+                   <Calendar  onChange={this.onChange}/>
+        </div>
 
         </div>
         <div className="col-sm-6 chore-form">

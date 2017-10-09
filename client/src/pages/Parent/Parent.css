@@ -18,12 +18,20 @@
   font-size: 2em;
 }
 
-.calender{
-  background-color: #000000;
-  text-align: center;
-  padding: 50px 5px;
-  font-size: 2em;
+.calendar{
+background-color: #000000;
+padding:30px 0px;
+text-align: center;
 }
+
+.calendar h2{
+  color:#ffffff;
+}
+
+.calendar div{
+  margin: 0px auto;
+}
+
 
 .link-btn a{
   font-weight: bolder;

@@ -9,12 +9,16 @@ export const  KidDropDown =props=>
      <span className="caret" ></span>
      </button>
      <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-     <li><a href="#">Name Here</a></li>
-     <li><a href="#">Name Here</a></li>
-     <li><a href="#">Name Here</a></li>
-     <li role="separator" class="divider"></li>
+     {props.kids.map((kid,i)=>
+             <li>
+               <button key={i} className="text-btn" id={kid.childid} value={kid.childName} type="button" onClick={props.handleKidChange} > 
+               {kid.childName} 
+               </button>
+             </li>
+              )}
+     <li role="separator" className="divider"></li>
      { props.addKid ?
-     <li><a href="#">Add Kid</a></li>
+     <li><button id="btnAddKid" className="text-add-kid-btn">Add Kid</button></li>
      : "" }
      </ul>
      </div>;

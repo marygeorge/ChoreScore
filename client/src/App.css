@@ -22,7 +22,7 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }*/
-input[type=name],input[type=password],input[type=email],input[type=username]{
+input[type=name],input[type=password],input[type=email],input[type=username],input[type=number]{
   margin:0px auto 20px auto;
   width: 90%;
   background-color: #000000;
@@ -46,5 +46,22 @@ input[type=button]{
   font-size: 30px;
   font-family: Universe;
   color: #c2e8fb;
+}
+
+.text-btn{
+  background:none;
+  background-color:none;
+  border:none;
+  margin:0;
+  padding:0;
+}
+
+li .text-add-kid-btn{
+  font-size: 1.2em;
+  background:none;
+  background-color:none;
+  border:none;
+  margin:0;
+  padding:0px 0px 0px 15px;
 }
 

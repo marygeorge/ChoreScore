@@ -58,13 +58,14 @@ router.route("/api/signUp").post((req,res)=>{
   });
 });
 
-router.route("/api/childsignup").get((req,res)=>{ 
+router.route("/api/childsignup").post((req,res)=>{ 
   console.log(req.body);
   const ch={
-    ChildName: req.body.parentFirstName,
-    ChildUsername: req.body.parentUserName,
-    ChildPassword: req.body.parentPassword,
+    ChildName: req.body.childName,
+    ChildUsername: req.body.childUsername,
+    ChildPassword: req.body.childPassword,
     ChildPointsEarned:0,
+    ParentId:req.body.parentid
   }
   db.Child.create(ch).then(function(result) {
     console.log("child created");

@@ -15,15 +15,17 @@ class Parent extends Component {
         addKidName:"",addKidUser:"",addKidPass:"",
         chores:[{taskName:"Do the dishes",RedeemStatus:"undone"},{taskName:"Take out the trash",RedeemStatus:"done"}],
         rewards:[{RewardName:"soccer ball",RewardPoints:"500"},{RewardName:"iphone",RewardPoints:"1000"}],
-        kids:[{childName:"Alex",childid:"1"},{childName:"Mary",childid:"2"},{childName:"Lauren",childid:"3"}] 
+        // kids:[{childName:"Alex",childid:"1"},{childName:"Mary",childid:"2"},{childName:"Lauren",childid:"3"}] 
+        kids:[] 
     };
 
     onChange = date => this.setState({ date });
 
     componentDidMount(){
-        API.allKids("sessionid").then(res=>console.log("this.setState({kids:res});"));
+        API.allKids(sessionStorage.getItem("parentid")).then(res=>console.log("this.setState({kids:res});"));
         API.allChildChores(this.state.selectedKidid).then(res=>console.log("this.setState({this.state.chores:res});"));
         API.allReward(this.state.selectedKidid).then(res=>console.log("this.setState({this.state.rewards:res});"));
+        
     };
     handleKidChange=(event)=>{
         this.setState({selectedKidid:event.target.id});
@@ -38,12 +40,15 @@ class Parent extends Component {
         }          
     };
       handleAddKid=()=>{ 
+          console.log("Add kid");
         const kid={
             childName:this.state.addKidName,
             childUsername:this.state.addKidUser,
-            childPassword:this.state.addKidPass
+            childPassword:this.state.addKidPass,
+            parentid:sessionStorage.getItem("parentid")
         }
-        API.addKid(kid).then(res=>console.log(res));
+        console.log(kid);
+        API.addKid(kid).then(res=>console.log("kid added"));
       };
        handleChoreStatus=(event)=>{ 
            const status={newstatus:event.target.value}

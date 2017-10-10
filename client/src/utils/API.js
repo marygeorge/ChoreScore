@@ -33,7 +33,7 @@ export default {
       return axios.post("/api/addreward", userData);
     },
     addKid: function(userData) {
-      return axios.post("/api/addkid", userData);
+      return axios.post("/api/childsignup", userData);
     },
     setChoreStatus:function(newStatus){
       return axios.put("api/chorestatus",newStatus);

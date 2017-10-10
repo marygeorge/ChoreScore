@@ -18,7 +18,7 @@ export const  KidDropDown =props=>
               )}
      <li role="separator" className="divider"></li>
      { props.addKid ?
-     <li><button id="btnAddKid" className="text-add-kid-btn">Add Kid</button></li>
+     <li><button id="btnAddKid" className="text-btn">Add Kid</button></li>
      : "" }
      </ul>
      </div>;

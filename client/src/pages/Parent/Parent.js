@@ -6,15 +6,20 @@ import {Chore} from "../../components/Chore/Chore.js"
 import {Reward} from "../../components/Reward/Reward.js"
 import {Popup} from "../../components/Popup/Popup.js"
 import { Link } from "react-router-dom";
+import Calendar from 'react-calendar';
 
 class Parent extends Component {
     state = {
+        date: new Date(),
         selectedKidid:"",selectedKidName:"",
         addKidName:"",addKidUser:"",addKidPass:"",
         chores:[{taskName:"Do the dishes",RedeemStatus:"undone"},{taskName:"Take out the trash",RedeemStatus:"done"}],
         rewards:[{RewardName:"soccer ball",RewardPoints:"500"},{RewardName:"iphone",RewardPoints:"1000"}],
         kids:[{childName:"Alex",childid:"1"},{childName:"Mary",childid:"2"},{childName:"Lauren",childid:"3"}] 
     };
+
+    onChange = date => this.setState({ date });
+
     componentDidMount(){
         API.allKids("sessionid").then(res=>console.log("this.setState({kids:res});"));
         API.allChildChores(this.state.selectedKidid).then(res=>console.log("this.setState({this.state.chores:res});"));
@@ -65,8 +70,11 @@ class Parent extends Component {
         
         <div className="row">
         <div className="col-sm-6">
-           <div className="calender">
-             <b>October 14th</b>
+           <div className="calendar">
+               <div className="calbox">
+                  <h2> {this.state.date.toString().substr(0,16)}</h2>
+                   <Calendar  onChange={this.onChange}/>
+               </div>
            </div> 
 
            <div className="reward-list">

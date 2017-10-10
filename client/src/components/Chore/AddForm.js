@@ -3,11 +3,20 @@ import React from "react";
 
 export const  AddForm=props=>
 <div >
+
 <input onChange={props.handleChange}  className="form-control" id="choreName" type="name" placeholder="Chore Name" />
-<input onChange={props.handleChange}  className="form-control" id="selectPointAmount" type="number" placeholder="Select Point Amount" />
-<input onChange={props.handleChange}  className="form-control" id="dueDate" type="name" placeholder="Due Date" />
-<input onChange={props.handleChange}  className="form-control" id="timeBox" type="name" placeholder="Time" />
-<input onChange={props.handleChange}  className="form-control" id="schedule" type="name" placeholder="Schedule" />
+<input onChange={props.handleChange}  className="form-control" id="choreDesc" type="name" placeholder="Description/ Notes" />
+<input onChange={props.handleChange}  className="form-control" id="selectPointAmount" type="number" placeholder="Enter Points" />
+<input onChange={props.handleChange}  className="form-control" id="startDate" type="name" placeholder="Start Date" />
+{/*<input onChange={props.handleChange}  className="form-control" id="Type" type="name" placeholder="Select Type" />*/}
+<select  onChange={props.handleChange}  className="form-control" id="choreType" background-color="black">
+  <option value="Once">Select Schedule</option>
+  <option value="Once">Once</option>
+  <option value="Daily">Daily</option>
+  <option value="Weekly">Weekly</option>
+  <option value="Altdays">Alt Days</option>
+</select>
+{/*<input onChange={props.handleChange}  className="form-control" id="mandatory" type="name" placeholder="Mandatory" hidden="hidden" />*/}
                        
 <input onClick={props.handleSubmit} type="button" class="submitChores" id="submitChores" value="Submit" />
 </div>;

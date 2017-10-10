@@ -6,8 +6,8 @@ export default {
       return axios.get("/api/login/"+userid+"/"+password+"/"+type);
     },
     //addChores
-    addChores: function(parentid,childid,name,desc,date,type,points) {
-      return axios.post("/api/addreward"+parentid+"/"+childid+"/"+type);
+    addChores: function(chore) {
+      return axios.post("/api/addtask");
     },
     allKids: function(parentid) {
       return axios.get("/api/childlist/"+parentid);

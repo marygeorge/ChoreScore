@@ -74,18 +74,10 @@ router.route("/api/childsignup").get((req,res)=>{
 
 // add task
 router.route("/api/addtask").post((req,res)=>{ 
+  console.log("***********Adding chore*************");
+  
   console.log(req.body);
-  const tsk={
-    ParentId:req.body.parentid,
-    ChildId:req.body.childId,
-    TaskName: req.body.taskname,
-    TaskDescription: req.body.taskdescription,
-    TaskPoints: req.body.taskpoints,
-    StartDate: req.body.startdate,
-    TaskType: req.body.tasktype,
-    Mandatory: req.body.mandatory,
-  }
-  db.Tasks.create(tsk).then(function(result) {
+  db.Tasks.create(req.body).then(function(result) {
     console.log("task created");
     // res.json(result);
     db.Tasks.findAll({
@@ -169,6 +161,8 @@ router.route("/api/getAllRewards/:parentid").get((req,res)=>{
 
 // list of all kids
 router.route("/api/childlist/:parentid").get((req,res)=>{ 
+  console.log("Finding children of:");
+  console.log(req.params.parentid);
   db.Child.findAll({
     where:{
         ParentId:req.params.parentid,

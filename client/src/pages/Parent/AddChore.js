@@ -9,21 +9,25 @@ import { Link } from "react-router-dom";
 class AddChore extends Component {
     state = {
         selectedKidid:"",selectedKidName:"",
-        choreName:"",chorePoint:"",choreDue:"",choreTimeBox:"",choreSchedule:"",
+        choreName:"",choreDesc:"",chorePoint:"",startdate:"",choretype:"",
         chores:[{taskName:"Do the dishes",RedeemStatus:"undone"},{taskName:"Take out the trash",RedeemStatus:"done"}],
         kids:[{childName:"Alex",childid:"1"},{childName:"Mary",childid:"2"},{childName:"Lauren",childid:"3"}]  
     };
 
     componentDidMount(){
-        API.allKids("sessionid").then(res=>console.log("this.setState({kids:res});"));
-    }
+        API.allKids(sessionStorage.getItem("parentid")).then(res=>{
+            console.log(res.data);
+            console.log("this.setState({kids:"+res+"});")
+        });
+    };
+
     handleChange=event=>{
         switch(event.target.id){
             case "choreName":this.setState({choreName:event.target.value});break;
+            case "choreDesc":this.setState({choreDesc:event.target.value});break;
             case "selectPointAmount":this.setState({chorePoint:event.target.value});break;
-            case "dueDate":this.setState({choreDue:event.target.value});break;
-            case "timeBox":this.setState({choreTimeBox:event.target.value});break;
-            case "schedule":this.setState({choreSchedule:event.target.value});break;
+            case "startDate":this.setState({startdate:event.target.value});break;
+            case "choreType":this.setState({choretype:event.target.value});break;
         }
     };
 
@@ -31,23 +35,27 @@ class AddChore extends Component {
         console.log(event.target.value);
     };
     handleSubmit=()=>{
-       console.log(this.state.choreName);
        const chore={
-       parentid:"seccion Id",
-       childId:"will be provide from dropdown ",
-       taskname:this.state.choreName,
-       taskdescription:"",
-       taskpoints:this.state.chorePoint,
-       startdate:this.state.choreTimeBox,
-       tasktype:this.state.choreSchedule,
-       mandatory:"not available"
+       ParentId:"seccion Id",
+       ChildId:"will be provide from dropdown ",
+       TaskName:this.state.choreName,
+       TaskDescription:this.state.choreDesc,
+       TaskPoints:this.state.chorePoint,
+       StartDate:this.state.startdate,
+       TaskType:this.state.choretype,
+       Mandatory:0,
+       TaskStatus:"not done"
        };
+       console.log(chore);
        API.addChore(chore).then((res)=>{console.log("done")});
     };
     handleKidChange=(event)=>{
        this.setState({selectedKidid:event.target.id});
        this.setState({selectedKidName:event.target.value});
        API.allChildChores(event.target.id).then(res=>console.log("this.setState({chores:res})"));
+     };
+     handleAddKid=(event)=>{
+        console.log("Add kid");
      };
      handleChoreStatus=(event)=>{ 
         const status={newstatus:event.target.value}
@@ -78,11 +86,7 @@ class AddChore extends Component {
 
         </div>
         <div className="col-sm-6 chore-form">
-<<<<<<< HEAD
-        <AddForm handleChange={this.handleChoreChange}  handleSubmit={this.handleAddChore} />
-=======
         <AddForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
->>>>>>> 3b83a00e197c2ac72fd4f6f8b05268a58f2993f2
         </div>
         </div>
 

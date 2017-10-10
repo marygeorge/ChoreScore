@@ -1,15 +1,18 @@
 
 import React from "react";
+// import {KidDropDown} from "../../components/KidDropDown/KidDropDown.js";
 
 export const  AddForm=props=>
 <div >
-
+<select  className="form-control">
+  <option></option>
+</select>
 <input onChange={props.handleChange}  className="form-control" id="choreName" type="name" placeholder="Chore Name" />
 <input onChange={props.handleChange}  className="form-control" id="choreDesc" type="name" placeholder="Description/ Notes" />
 <input onChange={props.handleChange}  className="form-control" id="selectPointAmount" type="number" placeholder="Enter Points" />
 <input onChange={props.handleChange}  className="form-control" id="startDate" type="name" placeholder="Start Date" />
 {/*<input onChange={props.handleChange}  className="form-control" id="Type" type="name" placeholder="Select Type" />*/}
-<select  onChange={props.handleChange}  className="form-control" id="choreType" background-color="black">
+<select  onChange={props.handleChange}  className="form-control" id="choreType" >
   <option value="Once">Select Schedule</option>
   <option value="Once">Once</option>
   <option value="Daily">Daily</option>
@@ -18,7 +21,7 @@ export const  AddForm=props=>
 </select>
 {/*<input onChange={props.handleChange}  className="form-control" id="mandatory" type="name" placeholder="Mandatory" hidden="hidden" />*/}
                        
-<input onClick={props.handleSubmit} type="button" class="submitChores" id="submitChores" value="Submit" />
+<input onClick={props.handleSubmit} type="button" className="submitChores" id="submitChores" value="Submit" />
 </div>;
 
 

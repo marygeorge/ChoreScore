@@ -9,12 +9,19 @@ import { Link } from "react-router-dom";
 class Parent extends Component {
     state = {
         selectedKidid:"",selectedKidName:"",
-        rewardName:"",amazonList:"",points:"",
-        rewards:[{RewardName:"soccer ball",RewardPoints:"500"},{RewardName:"iphone",RewardPoints:"1000"}],
-        kids:[{childName:"Alex",childid:"1"},{childName:"Mary",childid:"2"},{childName:"Lauren",childid:"3"}] 
+        rewardName:"",rewardDesc:"",points:"",
+        rewards:[],
+        kids:[] 
     };
     componentDidMount(){
-        API.allKids("sessionid").then(res=>console.log("this.setState({kids:res});"));
+        API.allKids(sessionStorage.getItem("parentid")).then(res=>{
+            this.setState({kids:res.data});
+        });
+        API.allReward(sessionStorage.getItem("parentid")).then(res=>{
+            console.log(res.data);
+            this.setState({rewards:res.data});
+           
+        });
     };
     handleKidChange=(event)=>{
         this.setState({selectedKidid:event.target.id});
@@ -22,23 +29,32 @@ class Parent extends Component {
         API.allChildChores(event.target.id).then(res=>console.log("this.setState({chores:res})"));
         API.allReward(event.target.id).then(res=>console.log("this.setState({rewards:res})"));
       };
-      handleChange=event=>{
+    handleChange=event=>{
+        // console.log(event.target.value);
         switch(event.target.id){
             case "rewardName":this.setState({rewardName:event.target.value});break;
-            case "amazonWishList":this.setState({amazonList:event.target.value});break;
+            case "rewardDescr":this.setState({rewardDesc:event.target.value});break;
             case "points":this.setState({points:event.target.value});break;
         }
         console.log("got it")
     };
     handleSubmit=()=>{
+        console.log("Submit reward");
         const reward={
-        parentid:"seccion Id",
-        rewardname:this.state.rewardName,
-        rewarddescription:this.state.amazonList,
-        rewardpoints:this.state.points
+            parentid:sessionStorage.getItem("parentid"),
+            rewardname:this.state.rewardName,
+            rewarddescription:this.state.rewardDesc,
+            rewardpoints:this.state.points
         };
+        console.log(reward);
         API.addReward(reward).then((res)=>{console.log("done")});
      };
+     handleDeleteReward=event=>{
+         console.log(event.target.id);
+         API.deleteReward(event.target.id).then((res)=>{console.log("done")});
+        //  /api/delreward/:id
+     };
+
     render() {
     return (
         <div>
@@ -57,12 +73,12 @@ class Parent extends Component {
         <div className="text-center"> <h2> {this.state.selectedKidName} </h2></div>
 
         <div className="row">
-        <div className="col-sm-6 calender">
+        <div className="col-sm-1 calender">
 
 
 
         </div>
-        <div className="col-sm-6 chore-form">
+        <div className="col-sm-6 reward-form">
         <AddForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
         </div>
         </div>
@@ -70,9 +86,9 @@ class Parent extends Component {
         <div className="row">
         <div className="col-sm-10 reward-list">
         {this.state.rewards.map(reward=>
-            <Reward title={reward.RewardName} points={reward.RewardPoints} />
-            )}
-            </div>
+            <Reward title={reward.RewardName} points={reward.RewardPoints} rewardId={reward.id} key={reward.id} handleDeleteReward={this.handleDeleteReward} />
+        )}
+        </div>
         <div className="col-sm-2">
             <div className="link-btn text-center">  
                 <Link to="/parent" >

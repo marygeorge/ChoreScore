@@ -10,15 +10,15 @@ export const  KidDropDown =props=>
      </button>
      <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
      {props.kids.map((kid,i)=>
-             <li>
-               <button key={i} className="text-btn" id={kid.childid} value={kid.childName} type="button" onClick={props.handleKidChange} > 
-               {kid.childName} 
+             <li key={kid.id}>
+               <button key={kid.id} className="text-btn" id={kid.id} value={kid.ChildName} type="button" onClick={props.handleKidChange} > 
+               {kid.ChildName} 
                </button>
              </li>
               )}
      <li role="separator" className="divider"></li>
      { props.addKid ?
-     <li><button id="btnAddKid" className="text-btn">Add Kid</button></li>
+     <li><button id="btnAddKid" className="text-btn">Add-Kid</button></li>
      : "" }
      </ul>
      </div>;

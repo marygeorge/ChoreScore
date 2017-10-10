@@ -95,23 +95,29 @@ router.route("/api/addtask").post((req,res)=>{
 
 // add rewards
 router.route("/api/addreward").post((req,res)=>{ 
-  console.log(req.body);
+  console.log("add reward*************************");
   const rwrd={
     ParentId:req.body.parentid,
     RewardName: req.body.rewardname,
-        RewardsDescription:req.body.rewarddescription,
-        RewardPoints: req.body.rewardpoints,
+    RewardsDescription:req.body.rewarddescription,
+    RewardPoints: req.body.rewardpoints,
   }
+  console.log(rwrd);
   db.Rewards.create(rwrd).then(function(result) {
     console.log("reward created");
-    db.Rewards.findAll({
-      where:{
-        ParentId:parenttid,
-      }
-      }).then(function(result) {
-        console.log(result);
-        res.json(result);
-      });
+  });
+});
+
+router.route("/api/delreward/:id").post((req,res)=>{ 
+  console.log("delete reward*************************");
+  console.log(req.params.id)
+  db.Rewards.destroy({
+    where:{
+      id:req.params.id
+    }
+  }).then(function(result) {
+    console.log("reward deleted");
+    res.json(result);
   });
 });
 
@@ -152,7 +158,10 @@ router.route("/api/getAllRewards/:parentid").get((req,res)=>{
           db.Rewards.findAll({
             where:{
               ParentId:req.params.parentid,
-            }
+            },
+            // order: [
+            //   ['RewardsPoints', 'ASC'],
+            // ],
            }).then(function(result) {
               console.log(result);
               res.json(result);

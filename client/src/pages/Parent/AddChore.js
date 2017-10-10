@@ -10,10 +10,11 @@ import Calendar from 'react-calendar';
 class AddChore extends Component {
     state = {
         date: new Date(),
+       
         selectedKidid:"",selectedKidName:"",
-        choreName:"",choreDesc:"",chorePoint:"",startdate:"",choretype:"",
+        choreName:"",choreDesc:"",chorePoint:"",startdate:"",choretype:"", kidid:0,
         chores:[{taskName:"Do the dishes",RedeemStatus:"undone"},{taskName:"Take out the trash",RedeemStatus:"done"}],
-        kids:[{childName:"Alex",childid:"1"},{childName:"Mary",childid:"2"},{childName:"Lauren",childid:"3"}]  
+        kids:[]  
     };
 
     onChange = date => this.setState({ date });
@@ -21,8 +22,12 @@ class AddChore extends Component {
     componentDidMount(){
         API.allKids(sessionStorage.getItem("parentid")).then(res=>{
             console.log(res.data);
-            console.log("this.setState({kids:"+res+"});")
+            this.setState({kids:res.data});
         });
+    };
+    
+    handleSelectKid=event=>{
+        this.setState({kidid:event.target.value});
     };
 
     handleChange=event=>{

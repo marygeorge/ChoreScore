@@ -14,17 +14,27 @@ class Parent extends Component {
         selectedKidid:"",selectedKidName:"",
         addKidName:"",addKidUser:"",addKidPass:"",
         chores:[{taskName:"Do the dishes",RedeemStatus:"undone"},{taskName:"Take out the trash",RedeemStatus:"done"}],
-        rewards:[{RewardName:"soccer ball",RewardPoints:"500"},{RewardName:"iphone",RewardPoints:"1000"}],
-        // kids:[{childName:"Alex",childid:"1"},{childName:"Mary",childid:"2"},{childName:"Lauren",childid:"3"}] 
+        // rewards:[{id:1,RewardName:"soccer ball",RewardPoints:"500"},{id:2,RewardName:"iphone",RewardPoints:"1000"}],
+        rewards:[],
         kids:[] 
     };
 
     onChange = date => this.setState({ date });
 
     componentDidMount(){
-        API.allKids(sessionStorage.getItem("parentid")).then(res=>console.log("this.setState({kids:res});"));
+        API.allKids(sessionStorage.getItem("parentid")).then(res=>{
+            console.log(res.data);
+            console.log(res.data.length);
+            this.setState({kids:res.data});
+            
+            // console.log({this.state.kids});
+        });
         API.allChildChores(this.state.selectedKidid).then(res=>console.log("this.setState({this.state.chores:res});"));
-        API.allReward(this.state.selectedKidid).then(res=>console.log("this.setState({this.state.rewards:res});"));
+        API.allReward(sessionStorage.getItem("parentid")).then(res=>{
+            console.log(res.data);
+            this.setState({rewards:res.data});
+            // console.log("this.setState({this.state.rewards:res});")
+        });
         
     };
     handleKidChange=(event)=>{
@@ -39,7 +49,7 @@ class Parent extends Component {
             case "kidPass":this.setState({addKidPass:event.target.value});break;
         }          
     };
-      handleAddKid=()=>{ 
+    handleAddKid=()=>{ 
           console.log("Add kid");
         const kid={
             childName:this.state.addKidName,
@@ -49,11 +59,17 @@ class Parent extends Component {
         }
         console.log(kid);
         API.addKid(kid).then(res=>console.log("kid added"));
-      };
-       handleChoreStatus=(event)=>{ 
-           const status={newstatus:event.target.value}
-        API.setChoreStatus(status).then(res=>console.log(res));
-      };
+    };
+    handleChoreStatus=(event)=>{ 
+            const status={newstatus:event.target.value}
+            API.setChoreStatus(status).then(res=>console.log(res));
+    };
+
+    handleDeleteReward=event=>{
+         console.log(event.target.id);
+         API.deleteReward(event.target.id).then((res)=>{console.log("done")});
+     };
+      
     render() {
     return (
         <div>
@@ -83,8 +99,8 @@ class Parent extends Component {
            </div> 
 
            <div className="reward-list">
-           {this.state.rewards.map(reward=>
-            <Reward title={reward.RewardName} points={reward.RewardPoints} />
+            {this.state.rewards.map(reward=>
+                <Reward title={reward.RewardName} points={reward.RewardPoints} rewardId={reward.id} key={reward.id} handleDeleteReward={this.handleDeleteReward} />
             )}
             <div className="link-btn text-center"> 
              <Link to="/parent/addreward" >

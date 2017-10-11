@@ -107,7 +107,17 @@ console.log("delete chore*************************");
     res.json(result);
   });
 });
-
+//set Task status 
+router.route("/api/markTask/:id/:status").post((req,res)=>{
+  console.log(req.params.id+ " updated to "+ req.params.status);
+  db.Tasks.update(
+    {TaskStatus:req.params.status},
+    {where:{  id:req.params.id},
+  }
+  ).then(function(result) {
+    res.json(result);
+  });
+});
 // add rewards
 router.route("/api/addreward").post((req,res)=>{ 
   console.log("add reward*************************");

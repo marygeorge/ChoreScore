@@ -54,4 +54,8 @@ export default {
     selectReward:function(newStatus){
       return axios.put("api/selectreward",newStatus);
     },
+    markTask:function(id,status){
+      console.log("api/markTask/"+id+"/"+status);
+      return axios.post("/api/markTask/"+id+"/"+status);
+    },
   };

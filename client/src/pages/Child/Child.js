@@ -55,15 +55,15 @@ class Child extends Component {
     }
         
     
-        handleDeleteReward=(event)=>{
-            const newStatus={
-                rewardid:event.target.id,
-                childid:"childidSession"
-            };
+    handleChoreStatus=(event)=>{
+        console.log(event.target.id);
+        API.markTask(event.target.id,"pending").then(res=>{
+            console.log(res);
+            console.log("done");
+            this.loadChores(this.state.date)
+        });
+    }
 
-            API.selectReward(newStatus).then(console.log("done"));
-
-        }
     render() {
     return (
         <div>
@@ -103,7 +103,7 @@ class Child extends Component {
                 </div>
                 <div className="col-sm-6 kid-chores">
                     {this.state.chores.map(chore=>
-                    <Chore key={chore.id} roleClick="confirm" handleStatus={this.handleChoreStatus} who="child" choreid={chore.id} handleDeleteChore={this.handleDeleteChore} title={chore.TaskName} points={chore.TaskPoints} status={chore.TaskStatus} />
+                    <Chore key={chore.id} roleClick="confirm" handleStatus={this.handleChoreStatus} who="child" choreid={chore.id}  title={chore.TaskName} points={chore.TaskPoints} status={chore.TaskStatus} />
                     )}  
                 </div> 
                </div> 

@@ -10,8 +10,8 @@ export const  Chore=props=>
       {props.who==="child" ? (
       <div className="col-sm-3 text-center">
         {
-         props.status=="undone"?<input type="image" value={props.roleClick} onClick={props.handleStatus} src = "/assets/redCheck.png" alt="red check" /> :
-         props.status=="done"?<input type="image" value={props.roleClick} onClick={props.handleStatus}  src = "/assets/yellowCheck.png" alt="yellow check" /> :
+         props.status=="not done"?<input type="image" value={props.roleClick} onClick={props.handleStatus} id={props.choreid} src = "/assets/redCheck.png" alt="red check" /> :
+         props.status=="pending"?<input type="image" value={props.roleClick} onClick={props.handleStatus}  src = "/assets/yellowCheck.png" alt="yellow check" /> :
          <img src = "/assets/greenCheck.png" alt="green check" /> 
         }
       </div>

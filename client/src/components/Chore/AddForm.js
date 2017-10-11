@@ -4,9 +4,7 @@ import React from "react";
 
 export const  AddForm=props=>
 <div >
-<select  className="form-control">
-  <option></option>
-</select>
+
 <input onChange={props.handleChange}  className="form-control" id="choreName" type="name" placeholder="Chore Name" />
 <input onChange={props.handleChange}  className="form-control" id="choreDesc" type="name" placeholder="Description/ Notes" />
 <input onChange={props.handleChange}  className="form-control" id="selectPointAmount" type="number" placeholder="Enter Points" />
@@ -21,7 +19,7 @@ export const  AddForm=props=>
 </select>
 {/*<input onChange={props.handleChange}  className="form-control" id="mandatory" type="name" placeholder="Mandatory" hidden="hidden" />*/}
                        
-<input onClick={props.handleSubmit} type="button" className="submitChores" id="submitChores" value="Submit" />
+<input onClick={props.handleSubmit} type="button" className="submitChores" id="submitChores" value="Add Chore" />
 </div>;
 
 

@@ -14,23 +14,32 @@ class Parent extends Component {
         kids:[] 
     };
     componentDidMount(){
+        this.loadKids();
+        this.loadRewards();
+    };
+
+    loadKids=()=>{
         API.allKids(sessionStorage.getItem("parentid")).then(res=>{
             this.setState({kids:res.data});
         });
+    };
+
+    loadRewards=()=>{
         API.allReward(sessionStorage.getItem("parentid")).then(res=>{
             console.log(res.data);
             this.setState({rewards:res.data});
-           
+            console.log(this.state.rewards);
         });
     };
+
     handleKidChange=(event)=>{
         this.setState({selectedKidid:event.target.id});
         this.setState({selectedKidName:event.target.value});
         API.allChildChores(event.target.id).then(res=>console.log("this.setState({chores:res})"));
         API.allReward(event.target.id).then(res=>console.log("this.setState({rewards:res})"));
       };
+      
     handleChange=event=>{
-        // console.log(event.target.value);
         switch(event.target.id){
             case "rewardName":this.setState({rewardName:event.target.value});break;
             case "rewardDescr":this.setState({rewardDesc:event.target.value});break;
@@ -47,12 +56,17 @@ class Parent extends Component {
             rewardpoints:this.state.points
         };
         console.log(reward);
-        API.addReward(reward).then((res)=>{console.log("done")});
+        API.addReward(reward).then((res)=>{
+            this.loadRewards();
+            console.log("done");
+        });
      };
      handleDeleteReward=event=>{
          console.log(event.target.id);
-         API.deleteReward(event.target.id).then((res)=>{console.log("done")});
-        //  /api/delreward/:id
+         API.deleteReward(event.target.id).then((res)=>{
+             this.loadRewards();
+             console.log("done");
+            });
      };
 
     render() {

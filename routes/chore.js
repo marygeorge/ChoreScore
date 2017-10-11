@@ -16,14 +16,6 @@ router.route("/api/login/:username/:password/:type").get((req,res)=>{
         }).then(function(result) {
             console.log(result.dataValues);
             res.json(result.dataValues);
-            // console.log(path.join(appDir+'/src/pages/Parent/Parent.js'));
-            
-            // res.send({redirect:path.join(appDir+'/src/pages/Parent/Parent.js')});
-            // res.redirect(path.join(appDir+'/src/pages/Parent/Parent.js'));
-            // res.writeHead(302, {
-            //   Location: '/Parent'
-            // });
-            // res.end();
         });
   }
   if(req.params.type==="child")
@@ -71,6 +63,17 @@ router.route("/api/childsignup").post((req,res)=>{
     console.log("child created");
     res.json(result);
   });
+});
+
+//get child details
+router.route("/api/getChild/:id").get((req,res)=>{ 
+  console.log("find"+req.params.id);
+  db.Child.findOne({
+    where :id=req.params.id
+  }).then(function(result) {
+    console.log("child found");
+    res.json(result);
+    });
 });
 
 // add task
@@ -121,18 +124,34 @@ router.route("/api/delreward/:id").post((req,res)=>{
   });
 });
 
-// pull up all the task per child per day.
-router.route("/api/gettasks/:childid/").get((req,res)=>{ 
+// // pull up all the task per child per day.
+// router.route("/api/gettasks/:childid/:date").get((req,res)=>{ 
+//   console.log("Find tasks for");
+//   console.log(req.params.childid);
+//    db.Tasks.findAll({
+//       where:{
+//         ChildId:req.params.childid,
+        
+//       }
+//       }).then(function(result) {
+//         console.log(result);
+//         res.json(result);
+//       });
+// });
+
+//get pending chore for the day
+router.route("/api/pendingChores/:parentid/:date").get((req,res)=>{ 
   console.log(req.params.childid);
-   db.Tasks.findAll({
+    db.Tasks.findAll({
       where:{
-        ChildId:req.params.childid,
+        ParentId:req.params.parentid,
+        StartDate:req.params.date,
+        TaskStatus:'pending',
       }
       }).then(function(result) {
         console.log(result);
         res.json(result);
-        // res.redirect("/childpage");
-      });
+    });
 });
 // pull up all the rewards.
 router.route("/api/getrewardChild/:childid").get((req,res)=>{ 
@@ -163,7 +182,7 @@ router.route("/api/getAllRewards/:parentid").get((req,res)=>{
             //   ['RewardsPoints', 'ASC'],
             // ],
            }).then(function(result) {
-              console.log(result);
+              //console.log(result);
               res.json(result);
             });
 
@@ -186,13 +205,14 @@ router.route("/api/childlist/:parentid").get((req,res)=>{
 //*******************************************************************************/
 //tasks for each child each day
 router.route("/api/gettasks/:childid/:day").get((req,res)=>{ 
-  console.log(req.params.childid);
+  console.log(req.params.day);
    db.Tasks.findAll({
       where:{
         ChildId:req.params.childid,
+        StartDate: { $like: req.params.day + '%' }
       }
       }).then(function(result) {
-        console.log(result);
+        //console.log(result);
         res.json(result);
         // res.redirect("/childpage");
       });

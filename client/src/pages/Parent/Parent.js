@@ -13,36 +13,56 @@ class Parent extends Component {
         date: new Date(),
         selectedKidid:"",selectedKidName:"",
         addKidName:"",addKidUser:"",addKidPass:"",
-        chores:[{taskName:"Do the dishes",RedeemStatus:"undone"},{taskName:"Take out the trash",RedeemStatus:"done"}],
+        chores:[],
         // rewards:[{id:1,RewardName:"soccer ball",RewardPoints:"500"},{id:2,RewardName:"iphone",RewardPoints:"1000"}],
         rewards:[],
         kids:[] 
     };
 
-    onChange = date => this.setState({ date });
+    
 
     componentDidMount(){
+        this.loadKids();
+       
+        this.loadRewards();
+    };
+
+    onChange = date => {
+        this.setState({ date });
+         this.loadPendingChores();
+    };
+
+
+    loadKids=()=>{
         API.allKids(sessionStorage.getItem("parentid")).then(res=>{
             console.log(res.data);
             console.log(res.data.length);
             this.setState({kids:res.data});
-            
-            // console.log({this.state.kids});
+        })
+        .catch(err => console.log(err));
+    };
+
+    loadPendingChores=()=>{
+        API.pendingChores(sessionStorage.getItem("parentid"),this.state.date).then(res=>{
+            console.log(res.data);
+            console.log("this.setState({this.state.chores:res});")
         });
-        API.allChildChores(this.state.selectedKidid).then(res=>console.log("this.setState({this.state.chores:res});"));
+    };
+
+    loadRewards=()=>{
         API.allReward(sessionStorage.getItem("parentid")).then(res=>{
             console.log(res.data);
             this.setState({rewards:res.data});
-            // console.log("this.setState({this.state.rewards:res});")
         });
-        
-    };
+    }
+
     handleKidChange=(event)=>{
         this.setState({selectedKidid:event.target.id});
         this.setState({selectedKidName:event.target.value});
-        API.allChildChores(event.target.id).then(res=>console.log("this.setState({this.state.chores:res})"));
+        //render Child/Child.js page
+        // API.allChildChores(event.target.id).then(res=>console.log("this.setState({this.state.chores:res})"));
       };
-      handleChange=event=>{
+    handleChange=event=>{
         switch(event.target.id){
             case "kidName":this.setState({addKidName:event.target.value});break;
             case "kidUser":this.setState({addKidUser:event.target.value});break;
@@ -58,16 +78,26 @@ class Parent extends Component {
             parentid:sessionStorage.getItem("parentid")
         }
         console.log(kid);
-        API.addKid(kid).then(res=>console.log("kid added"));
+        API.addKid(kid).then(res=>{
+            this.loadKids();
+            console.log("kid added")
+        });
+        
     };
     handleChoreStatus=(event)=>{ 
             const status={newstatus:event.target.value}
-            API.setChoreStatus(status).then(res=>console.log(res));
+            API.setChoreStatus(status).then(res=>{
+                this.loadPendingChores();
+                console.log(res)
+            });
     };
 
     handleDeleteReward=event=>{
          console.log(event.target.id);
-         API.deleteReward(event.target.id).then((res)=>{console.log("done")});
+         API.deleteReward(event.target.id).then((res)=>{
+             this.loadRewards();
+             console.log("done")
+            });
      };
       
     render() {
@@ -80,7 +110,7 @@ class Parent extends Component {
         <span className="chore">ChoreScore</span>  
         </div>
         <div className="col-sm-6">
-         <KidDropDown addKid="true" kids={this.state.kids} handleKidChange={this.handleKidChange}  />
+         <KidDropDown addKid="true" kids={this.state.kids} key={this.state.kids.id} handleKidChange={this.handleKidChange}  />
        </div>
         </div>
 
@@ -114,16 +144,27 @@ class Parent extends Component {
 
 
         <div className="col-sm-6 kid-chores">
+        {this.state.chores.length ? (
+            <div>
             {this.state.chores.map(chore=>
-          <Chore key={chore.taskName} roleClick="confirm" handleStatus={this.handleChoreStatus} title={chore.taskName} status={chore.RedeemStatus} />
+            <Chore key={chore.taskName} roleClick="confirm" handleStatus={this.handleChoreStatus} title={chore.taskName} status={chore.RedeemStatus} />
             )}
-            <div className="link-btn text-right">  
+            </div>
+        ):(
+            <div>
+            <h3>No Chores to Approve - {this.state.date.toString().substr(4,11)}</h3>
+            </div>
+        )}
+            
+        </div>
+
+        {/*<div className="link-btn text-right">  
             <Link to="/parent/addchore" >
             Add Chores
             <img src = "/assets/addChoresBtn.png" alt="add chores button" />
             </Link>        
-            </div>
-        </div>
+            </div>*/}
+
         </div>
         
      <Popup handleChange={this.handleChange} handleSubmit={this.handleAddKid} />

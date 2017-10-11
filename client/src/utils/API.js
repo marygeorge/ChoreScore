@@ -15,11 +15,20 @@ export default {
     allReward: function(parentid) {
       return axios.get("/api/getAllRewards/"+parentid);
     },
-    allChildChores: function(childid) {
+    allChildChores: function(childid) { 
       return axios.get("/api/gettasks/"+childid);
     },
-    deleteReward:function(rewardid){
+    deleteReward:function(rewardid){ //delete a reward
       return axios.post(" /api/delreward/"+rewardid);
+    },
+    pendingChores:function(parentid,date){ //find chores with status =pending for a particular day
+      return axios.get(" /api/pendingChores/"+parentid+"/"+date);
+    },
+    getChildChores:function(childid,date){ // find a child's chores for the day
+      return axios.get("/api/gettasks/"+childid+"/"+date);
+    },
+    getChild:function(childid){ //get details of a child
+      return axios.get("/api/getChild/"+childid);
     },
 
     signUp: function(userData) {

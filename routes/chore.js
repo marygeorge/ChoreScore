@@ -69,7 +69,7 @@ router.route("/api/childsignup").post((req,res)=>{
 router.route("/api/getChild/:id").get((req,res)=>{ 
   console.log("find"+req.params.id);
   db.Child.findOne({
-    where :id=req.params.id
+    where :{id: req.params.id}
   }).then(function(result) {
     console.log("child found");
     res.json(result);
@@ -108,6 +108,7 @@ router.route("/api/addreward").post((req,res)=>{
   console.log(rwrd);
   db.Rewards.create(rwrd).then(function(result) {
     console.log("reward created");
+     res.json(result);
   });
 });
 

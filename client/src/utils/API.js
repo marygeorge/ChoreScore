@@ -28,6 +28,7 @@ export default {
       return axios.get("/api/gettasks/"+childid+"/"+date);
     },
     getChild:function(childid){ //get details of a child
+      console.log("getvhild0");
       return axios.get("/api/getChild/"+childid);
     },
 

@@ -59,6 +59,9 @@ class Parent extends Component {
     handleKidChange=(event)=>{
         this.setState({selectedKidid:event.target.id});
         this.setState({selectedKidName:event.target.value});
+        sessionStorage.setItem("selectedChildId", event.target.id);
+         window.location='/parent/ChildPage';
+         ///parent/ChildPage
         //render Child/Child.js page
         // API.allChildChores(event.target.id).then(res=>console.log("this.setState({this.state.chores:res})"));
       };

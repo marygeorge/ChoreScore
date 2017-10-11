@@ -13,11 +13,12 @@ import {AddForm} from "../../components/Chore/AddForm.js";
 class ChildPage extends Component {
     state = {
         date: new Date(),
-        selectedKidid:"",selectedKidName:"",
-        addKidName:"",addKidUser:"",addKidPass:"",
+        selectedKidid:0,
+        selectedKidName:"",
+        addKidName:"",
+        addKidUser:"",
+        addKidPass:"",
         chores:[],
-        // rewards:[{id:1,RewardName:"soccer ball",RewardPoints:"500"},{id:2,RewardName:"iphone",RewardPoints:"1000"}],
-       // rewards:[],
         kids:[]
     };
 
@@ -25,41 +26,44 @@ class ChildPage extends Component {
 
     componentDidMount(){
         // not a good idea to pass id in query string. Need to find a better way
-        let str=this.props.location.search
-        let id= parseInt( str.substr(4,str.length));
-        id=1;
-        
-        this.setState({selectedKidid:id});
-        console.log(id);
+        this.setChild();
+        this.loadKids();
+        this.loadChores();
+    };
+
+    setChild=()=>{
+        // let str=this.props.location.search
+        // let id= parseInt( str.substr(4,str.length));
+        // console.log("id= " + id);
+        this.setState({selectedKidid:sessionStorage.getItem("selectedChildId")});
         console.log(this.state.selectedKidid);
-        
-        API.getChild(id).then(res=>{
-            console.log("Child details");
-            console.log(res.data);
-             this.setState({selectedKidName:res.data.Name});
-        });
-        API.allKids(sessionStorage.getItem("parentid")).then(res=>{
-            //console.log(res.data);
-            //console.log(res.data.length);
-            this.setState({kids:res.data});
+        API.getChild(sessionStorage.getItem("selectedChildId")).then(res=>{
+            console.log(res);
+             this.setState({selectedKidName:res.data.ChildName});
         });
         const year = this.state.date.getFullYear();
         const month = this.state.date.getMonth()+1;
         const day = this.state.date.getDate();
         const dateString = `${year}-${month}-${day}`; 
         console.log(dateString);
-        API.getChildChores(id,dateString).then(res=>{
-            console.log("tasks for "+dateString);
+        API.getChildChores(sessionStorage.getItem("selectedChildId"),dateString).then(res=>{
             this.setState({chores:res.data});
-            console.log(this.state.chores);
         });
-
-
-
     };
 
-    onChange = date => {this.setState({ date })
+    loadKids=()=>{
+        API.allKids(sessionStorage.getItem("parentid")).then(res=>{
+            this.setState({kids:res.data});
+        });
+    };
 
+    loadChores=()=>{
+        
+    }
+
+    onChange = date => {
+        this.setState({ date })
+        this.loadChores();
     };
 
     
@@ -84,8 +88,17 @@ class ChildPage extends Component {
             parentid:sessionStorage.getItem("parentid")
         }
         console.log(kid);
-        API.addKid(kid).then(res=>console.log("kid added"));
+        API.addKid(kid).then(res=>{
+            this.loadKids();
+            console.log("kid added")
+        });
     };
+    handleKidChange=(event)=>{
+        this.setState({selectedKidid:event.target.id});
+        this.setState({selectedKidName:event.target.value});
+        sessionStorage.setItem("selectedChildId", event.target.id);
+         window.location='/parent/ChildPage';
+     };
     // handleChoreStatus=(event)=>{
     //         const status={newstatus:event.target.value}
     //         API.setChoreStatus(status).then(res=>console.log(res));
@@ -103,7 +116,10 @@ class ChildPage extends Component {
        TaskStatus:"not done"
        };
        console.log(chore);
-       API.addChore(chore).then((res)=>{console.log("done")});
+       API.addChore(chore).then((res)=>{
+           this.loadChores();
+           console.log("done")
+        });
     };
 
 
@@ -171,12 +187,7 @@ class ChildPage extends Component {
             <div className="col-sm-8 col-sm-offset-2 chore-form">
             <AddForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
             </div>
-
-            {/*<Link to="/parent/addchore" >
-            Add Chores
-            <img src = "/assets/addChoresBtn.png" alt="add chores button" />
-            </Link>*/}
-        </div>
+      </div>
 
         </div>
 

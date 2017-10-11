@@ -12,7 +12,7 @@ import {AddForm} from "../../components/Chore/AddForm.js";
 
 class ChildPage extends Component {
     state = {
-        date: new Date(),
+        selDate: new Date(),
         selectedKidid:0,
         selectedKidName:"",
         addKidName:"",
@@ -28,7 +28,7 @@ class ChildPage extends Component {
         // not a good idea to pass id in query string. Need to find a better way
         this.setChild();
         this.loadKids();
-        this.loadChores();
+        this.loadChores(new Date());
     };
 
     setChild=()=>{
@@ -41,14 +41,6 @@ class ChildPage extends Component {
             console.log(res);
              this.setState({selectedKidName:res.data.ChildName});
         });
-        const year = this.state.date.getFullYear();
-        const month = this.state.date.getMonth()+1;
-        const day = this.state.date.getDate();
-        const dateString = `${year}-${month}-${day}`; 
-        console.log(dateString);
-        API.getChildChores(sessionStorage.getItem("selectedChildId"),dateString).then(res=>{
-            this.setState({chores:res.data});
-        });
     };
 
     loadKids=()=>{
@@ -57,13 +49,26 @@ class ChildPage extends Component {
         });
     };
 
-    loadChores=()=>{
-        
+    loadChores=(date)=>{
+        // const year = this.state.selDate.getFullYear();
+        // const month = this.state.selDate.getMonth()+1;
+        // const day = this.state.selDate.getDate();
+         const year = date.getFullYear();
+        const month =date.getMonth()+1;
+        const day = date.getDate();
+        const dateString = `${year}-${month}-${day}`; 
+        console.log(dateString);
+        // console.log(sessionStorage.getItem("selectedChildId"));
+        API.getChildChores(sessionStorage.getItem("selectedChildId"),dateString).then(res=>{
+            console.log(res);
+            this.setState({chores:res.data});
+        });
     }
 
     onChange = date => {
-        this.setState({ date })
-        this.loadChores();
+        this.setState({selDate: date });
+        this.setState({startdate:date});
+        this.loadChores(date);
     };
 
     
@@ -97,12 +102,9 @@ class ChildPage extends Component {
         this.setState({selectedKidid:event.target.id});
         this.setState({selectedKidName:event.target.value});
         sessionStorage.setItem("selectedChildId", event.target.id);
-         window.location='/parent/ChildPage';
+        window.location='/parent/ChildPage';
      };
-    // handleChoreStatus=(event)=>{
-    //         const status={newstatus:event.target.value}
-    //         API.setChoreStatus(status).then(res=>console.log(res));
-    // };
+   
     handleSubmit=()=>{
        const chore={
        ParentId:sessionStorage.getItem("parentid"),
@@ -120,6 +122,14 @@ class ChildPage extends Component {
            this.loadChores();
            console.log("done")
         });
+        this.loadChores(this.state.selDate);
+    };
+    handleDeleteChore=(event)=>{
+        console.log(event.target.id);
+        API.deleteChore(event.target.id).then((res)=>{
+            console.log("chore deleted");
+            this.loadChores(this.state.selDate);
+        });
     };
 
 
@@ -127,66 +137,60 @@ class ChildPage extends Component {
     return (
         <div>
         <div className="navbar">
-        <div className="row">
-        <div className="col-sm-6">
-        <img className="logo" src = "assets/logo.png" alt= "logo" />
-        <span className="chore">ChoreScore</span>
+            <div className="row">
+                <div className="col-sm-6">
+                    <img className="logo" src = "assets/logo.png" alt= "logo" />
+                    <span className="chore">ChoreScore</span>
+                </div>
+                <div className="col-sm-6">
+                    <KidDropDown addKid="true" kids={this.state.kids} handleKidChange={this.handleKidChange}  />
+                </div>
+            </div>
         </div>
-        <div className="col-sm-6">
-         <KidDropDown addKid="true" kids={this.state.kids} handleKidChange={this.handleKidChange}  />
-         
-       </div>
-        </div>
-
-        </div>
-
         <div className="text-center"> <h2> {this.state.selectedKidName} </h2></div>
-
+        
 
         <div className="row">
-        <div className="col-sm-6">
-           <div className="calendar">
-               <div className="calbox">
-                  <h2> {this.state.date.toString().substr(0,16)}</h2>
-                   <Calendar  onChange={this.onChange}/>
-               </div>
-           </div>
-
-           {/*<div className="reward-list">
-            {this.state.rewards.map(reward=>
-                <Reward title={reward.RewardName} points={reward.RewardPoints} rewardId={reward.id} key={reward.id} handleDeleteReward={this.handleDeleteReward} />
-            )}
-            <div className="link-btn text-center">
-             <Link to="/parent/addreward" >
-              Add Reward
-             <img src = "/assets/addChoresBtn.png" alt="add chores button" />
-             </Link>
-             </div>
-         </div>*/}
-        </div>
-
-
+            <div className="col-sm-6">
+            <div className="calendar">
+                <div className="calbox">
+                    <h2> {this.state.selDate.toString().substr(0,16)}</h2>
+                    <Calendar  onChange={this.onChange}/>
+                </div>
+            </div>
+            </div>
 
         <div className="col-sm-6 kid-chores">
         {this.state.chores.length ? (
             <div>
+                <h3> Chores for {this.state.selDate.toString().substr(4,11)}</h3>
             {this.state.chores.map(chore=>
-            <Chore key={chore.id} roleClick="confirm" handleStatus={this.handleChoreStatus} title={chore.TaskName} status={chore.TaskStatus} />
+            <Chore key={chore.id} roleClick="confirm" handleStatus={this.handleChoreStatus} who="parent" choreid={chore.id} handleDeleteChore={this.handleDeleteChore} title={chore.TaskName} status={chore.TaskStatus} />
             )}
             </div>
         ):(
             <div>
-            <h3>No Chores for set this day - {this.state.date.toString().substr(4,11)}</h3>
+            <h3>No Chores for set this day - {this.state.selDate.toString().substr(4,11)}</h3>
             </div>
         )}
 
         </div>
+        
 
         <div className="link-btn text-right">
-<br/><br/>
+        <br/><br/>
             <div className="col-sm-8 col-sm-offset-2 chore-form">
             <AddForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
             </div>
+            <div className="col-sm-2">
+            <div className="link-btn text-center">  
+                <Link to="/parent" >
+                <img className="backMainBtn" 
+                src = "/assets/backMainBtn.png" alt="back to main button" /><br/>
+                Back To Main
+                </Link>
+            </div>
+        </div>
       </div>
 
         </div>

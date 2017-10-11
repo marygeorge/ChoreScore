@@ -28,8 +28,12 @@ export default {
       return axios.get("/api/gettasks/"+childid+"/"+date);
     },
     getChild:function(childid){ //get details of a child
-      console.log("getvhild0");
+      //console.log("getvhild0");
       return axios.get("/api/getChild/"+childid);
+    },
+    deleteChore:function(choreid){
+      console.log("delete chore "+choreid)
+      return axios.post("/api/deleteTask/"+choreid);
     },
 
     signUp: function(userData) {

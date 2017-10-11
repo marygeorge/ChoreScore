@@ -95,6 +95,19 @@ router.route("/api/addtask").post((req,res)=>{
       });
   });
 });
+//delete task
+router.route("/api/deleteTask/:choreid").post((req,res)=>{
+console.log("delete chore*************************");
+  console.log(req.params.choreid)
+  db.Tasks.destroy({
+    where:{
+      id:req.params.choreid
+    }
+  }).then(function(result) {
+    console.log("chore deleted");
+    res.json(result);
+  });
+});
 
 // add rewards
 router.route("/api/addreward").post((req,res)=>{ 

@@ -45,10 +45,21 @@ class Login extends Component {
     handleLogin=()=>{
         API.login(this.state.sinUsername,this.state.sinPassword,this.state.loginType)
         .then(res => {
+            if(this.state.loginType==="parent") 
+            {
             console.log(res.data);
-            sessionStorage.setItem("parentid",res.data.id);
+            sessionStorage.setItem("parentid", res.data.id);
             console.log(sessionStorage.getItem("parentid"));
-            window.location='./Parent/';
+            window.location='./parent/';
+            }
+        if(this.state.loginType==="child")
+            {
+            console.log(res.data);
+            sessionStorage.setItem("childid",res.data.id);
+            console.log(sessionStorage.getItem("childid"));
+            window.location='./child/';
+            }
+        
         })
         .catch(err => console.log(err));
     };

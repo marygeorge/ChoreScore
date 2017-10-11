@@ -26,9 +26,8 @@ router.route("/api/login/:username/:password/:type").get((req,res)=>{
                 ChildPassword: req.params.password
             }
         }).then(function(result) {
-            console.log(result);
-           // res.json(result);
-             res.redirect("/childpage");
+            console.log(result.dataValues);
+            res.json(result.dataValues);
         });
   }
   
@@ -83,16 +82,16 @@ router.route("/api/addtask").post((req,res)=>{
   console.log(req.body);
   db.Tasks.create(req.body).then(function(result) {
     console.log("task created");
-    // res.json(result);
-    db.Tasks.findAll({
-      where:{
-        ParentId:parenttid,
-      }
-      }).then(function(result) {
-        console.log(result);
-        res.json(result);
-        // res.redirect("/childpage");
-      });
+     res.json(result);
+    // db.Tasks.findAll({
+    //   where:{
+    //     ParentId:parenttid,
+    //   }
+    //   }).then(function(result) {
+    //     console.log(result);
+    //     res.json(result);
+    //     // res.redirect("/childpage");
+    //   });
   });
 });
 //delete task
@@ -138,20 +137,6 @@ router.route("/api/delreward/:id").post((req,res)=>{
   });
 });
 
-// // pull up all the task per child per day.
-// router.route("/api/gettasks/:childid/:date").get((req,res)=>{ 
-//   console.log("Find tasks for");
-//   console.log(req.params.childid);
-//    db.Tasks.findAll({
-//       where:{
-//         ChildId:req.params.childid,
-        
-//       }
-//       }).then(function(result) {
-//         console.log(result);
-//         res.json(result);
-//       });
-// });
 
 //get pending chore for the day
 router.route("/api/pendingChores/:parentid/:date").get((req,res)=>{ 

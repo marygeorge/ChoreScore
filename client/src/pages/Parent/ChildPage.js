@@ -119,7 +119,7 @@ class ChildPage extends Component {
        };
        console.log(chore);
        API.addChore(chore).then((res)=>{
-           this.loadChores();
+           this.loadChores(this.state.selDate);
            console.log("done")
         });
         this.loadChores(this.state.selDate);
@@ -165,7 +165,7 @@ class ChildPage extends Component {
             <div>
                 <h3> Chores for {this.state.selDate.toString().substr(4,11)}</h3>
             {this.state.chores.map(chore=>
-            <Chore key={chore.id} roleClick="confirm" handleStatus={this.handleChoreStatus} who="parent" choreid={chore.id} handleDeleteChore={this.handleDeleteChore} title={chore.TaskName} status={chore.TaskStatus} />
+            <Chore key={chore.id} roleClick="confirm" handleStatus={this.handleChoreStatus} who="parent" choreid={chore.id} handleDeleteChore={this.handleDeleteChore} title={chore.TaskName} points={chore.TaskPoints} status={chore.TaskStatus} />
             )}
             </div>
         ):(

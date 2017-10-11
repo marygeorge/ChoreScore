@@ -50,6 +50,8 @@ export default {
     },
     setChoreStatus:function(newStatus){
       return axios.put("api/chorestatus",newStatus);
-    }
-    
+    },
+    selectReward:function(newStatus){
+      return axios.put("api/selectreward",newStatus);
+    },
   };

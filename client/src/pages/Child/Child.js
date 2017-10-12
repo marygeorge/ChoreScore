@@ -6,12 +6,14 @@ import {Chore} from "../../components/Chore/Chore.js"
 import {Reward} from "../../components/Reward/Reward.js"
 import {Link} from "react-router-dom";
 import Calendar from 'react-calendar';
+import {Circle} from "../../components/Circle/Circle.js"
 
 
 class Child extends Component {
     state = {
          date: new Date(),
          child:{},
+         totalPoint:"750",
         chores:[{taskName:"Do the dishes",RedeemStatus:"undone"},{taskName:"Take out the trash",RedeemStatus:"done"}],
         rewards:[{RewardName:"soccer ball",RewardPoints:"500"},{RewardName:"iphone",RewardPoints:"1000"}],
     };
@@ -107,7 +109,20 @@ class Child extends Component {
                     )}  
                 </div> 
                </div> 
+
+               {/*=========Circle Test Demo ================*/}
+               <div className="row">
+                   <div className="col-sm-12 circle-progress-bar">
+
+                       {this.state.rewards.map(reward=>
+                       <Circle totalPoint={this.state.totalPoint} rewardPoint={reward.RewardPoints} rewardName={reward.RewardName}  />
+                    )}
+                     
+                   </div> 
+               </div>
+               {/*=========End Of Circle Test Demo ================*/}
         </div>
+      
         )};
  }
 

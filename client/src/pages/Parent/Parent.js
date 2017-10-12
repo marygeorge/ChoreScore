@@ -8,6 +8,8 @@ import {Popup} from "../../components/Popup/Popup.js"
 import { Link } from "react-router-dom";
 import Calendar from 'react-calendar';
 
+
+
 class Parent extends Component {
     state = {
         date: new Date(),
@@ -22,23 +24,22 @@ class Parent extends Component {
     
 
     componentDidMount(){
+        console.log("new date"+new Date());
         this.isLoggedIn();
         this.loadKids();
-        this.loadPendingChores(new Date())
         this.loadRewards();
+        this.loadPendingChores(new Date())
     };
 
     isLoggedIn=()=>
     {
+        
         if(sessionStorage.getItem("parentid")==="")
         {   
             console.log("not Logged in");
             window.location='/';
         }
-        else
-        {
-            console.log("Parent "+sessionStorage.getItem("parentid"));
-        }
+        
     };
 
     onChange = date => {
@@ -49,8 +50,8 @@ class Parent extends Component {
 
     loadKids=()=>{
         API.allKids(sessionStorage.getItem("parentid")).then(res=>{
-            console.log(res.data);
-            console.log(res.data.length);
+            // console.log(res.data);
+            // console.log(res.data.length);
             this.setState({kids:res.data});
         })
         .catch(err => console.log(err));
@@ -58,14 +59,14 @@ class Parent extends Component {
 
     loadPendingChores=(date)=>{
         API.pendingChores(sessionStorage.getItem("parentid"),date).then(res=>{
-            console.log(res.data);
+            console.log("pending chores for "+date);
             this.setState({chores:res.data});
         });
     };
 
     loadRewards=()=>{
         API.allReward(sessionStorage.getItem("parentid")).then(res=>{
-            console.log(res.data);
+            // console.log(res.data);
             this.setState({rewards:res.data});
         });
     }
@@ -94,7 +95,7 @@ class Parent extends Component {
             childPassword:this.state.addKidPass,
             parentid:sessionStorage.getItem("parentid")
         }
-        console.log(kid);
+        // console.log(kid);
         API.addKid(kid).then(res=>{
             this.loadKids();
             console.log("kid added")
@@ -105,7 +106,7 @@ class Parent extends Component {
             const status={newstatus:event.target.value}
             API.setChoreStatus(status).then(res=>{
                 this.loadPendingChores();
-                console.log(res)
+                // console.log(res)
             });
     };
 
@@ -121,7 +122,7 @@ class Parent extends Component {
          console.log(event.target.id);
          API.markTask(event.target.id,"done").then((res)=>{
              this.loadPendingChores(this.state.date);
-             console.log(res)
+            //  console.log(res)
             });
      }
       

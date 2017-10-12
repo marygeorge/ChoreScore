@@ -111,11 +111,12 @@ class Child extends Component {
                </div> 
 
                {/*=========Circle Test Demo ================*/}
+               <h3>Points Earned {this.state.child.ChildPointsEarned}</h3>
                <div className="row">
                    <div className="col-sm-12 circle-progress-bar">
-
+                   
                        {this.state.rewards.map(reward=>
-                       <Circle totalPoint={this.state.totalPoint} rewardPoint={reward.RewardPoints} rewardName={reward.RewardName}  />
+                       <Circle totalPoint={this.state.child.ChildPointsEarned} rewardPoint={reward.RewardPoints} rewardName={reward.RewardName}  />
                     )}
                      
                    </div> 

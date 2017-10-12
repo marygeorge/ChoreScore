@@ -26,6 +26,7 @@ export default {
     },
     
     getChildChores:function(childid,date){ // find a child's chores for the day
+    console.log("/api/gettasks/"+childid+"/"+date);
       return axios.get("/api/gettasks/"+childid+"/"+date);
     },
     getChild:function(childid){ //get details of a child

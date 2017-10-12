@@ -10,6 +10,11 @@ import { Link } from "react-router-dom";
 import Calendar from 'react-calendar';
 import {AddForm} from "../../components/Chore/AddForm.js";
 
+//datepicker
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import 'react-datepicker/dist/react-datepicker.css';
+
 class ChildPage extends Component {
     state = {
         selDate: new Date(),
@@ -26,17 +31,14 @@ class ChildPage extends Component {
 
     componentDidMount(){
         // not a good idea to pass id in query string. Need to find a better way
+        console.log("new date"+new Date());
         this.setChild();
         this.loadKids();
         this.loadChores(new Date());
     };
 
     setChild=()=>{
-        // let str=this.props.location.search
-        // let id= parseInt( str.substr(4,str.length));
-        // console.log("id= " + id);
         this.setState({selectedKidid:sessionStorage.getItem("selectedChildId")});
-        console.log(this.state.selectedKidid);
         API.getChild(sessionStorage.getItem("selectedChildId")).then(res=>{
             console.log(res);
              this.setState({selectedKidName:res.data.ChildName});
@@ -50,15 +52,11 @@ class ChildPage extends Component {
     };
 
     loadChores=(date)=>{
-        // const year = this.state.selDate.getFullYear();
-        // const month = this.state.selDate.getMonth()+1;
-        // const day = this.state.selDate.getDate();
-         const year = date.getFullYear();
+        const year = date.getFullYear();
         const month =date.getMonth()+1;
         const day = date.getDate();
         const dateString = `${year}-${month}-${day}`; 
         console.log(dateString);
-        // console.log(sessionStorage.getItem("selectedChildId"));
         API.getChildChores(sessionStorage.getItem("selectedChildId"),dateString).then(res=>{
             console.log(res);
             this.setState({chores:res.data});

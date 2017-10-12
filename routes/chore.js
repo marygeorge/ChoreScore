@@ -229,7 +229,8 @@ router.route("/api/gettasks/:childid/:day").get((req,res)=>{
    db.Tasks.findAll({
       where:{
         ChildId:req.params.childid,
-        StartDate: { $like: req.params.day + '%' }
+        StartDate: { gte: req.params.day + ' 00:00' },
+        StartDate: { lte: req.params.day + ' 23:59' }
       }
       }).then(function(result) {
         //console.log(result);

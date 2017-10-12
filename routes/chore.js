@@ -14,7 +14,7 @@ router.route("/api/login/:username/:password/:type").get((req,res)=>{
                 ParentPassword: req.params.password
             }
         }).then(function(result) {
-            console.log(result.dataValues);
+            //console.log(result.dataValues);
             res.json(result.dataValues);
         });
   }
@@ -26,7 +26,7 @@ router.route("/api/login/:username/:password/:type").get((req,res)=>{
                 ChildPassword: req.params.password
             }
         }).then(function(result) {
-            console.log(result.dataValues);
+            //console.log(result.dataValues);
             res.json(result.dataValues);
         });
   }
@@ -34,7 +34,7 @@ router.route("/api/login/:username/:password/:type").get((req,res)=>{
 });
 
 router.route("/api/signUp").post((req,res)=>{ 
-  console.log(req.body);
+  //console.log(req.body);
   const pare={
     ParentFirstName: req.body.firstname,
     ParentLastName:req.body.lastname ,
@@ -50,7 +50,7 @@ router.route("/api/signUp").post((req,res)=>{
 });
 
 router.route("/api/childsignup").post((req,res)=>{ 
-  console.log(req.body);
+  //console.log(req.body);
   const ch={
     ChildName: req.body.childName,
     ChildUsername: req.body.childUsername,
@@ -79,20 +79,11 @@ router.route("/api/getChild/:id").get((req,res)=>{
 router.route("/api/addtask").post((req,res)=>{ 
   console.log("***********Adding chore*************");
   
-  console.log(req.body);
+  //console.log(req.body);
   db.Tasks.create(req.body).then(function(result) {
     console.log("task created");
      res.json(result);
-    // db.Tasks.findAll({
-    //   where:{
-    //     ParentId:parenttid,
-    //   }
-    //   }).then(function(result) {
-    //     console.log(result);
-    //     res.json(result);
-    //     // res.redirect("/childpage");
-    //   });
-  });
+ });
 });
 //delete task
 router.route("/api/deleteTask/:choreid").post((req,res)=>{
@@ -115,6 +106,25 @@ router.route("/api/markTask/:id/:status").post((req,res)=>{
     {where:{  id:req.params.id},
   }
   ).then(function(result) {
+    if (req.params.status==="done")// if a task is being marked 'done' the ChildPintsEarned should be incremented by TaskPoints
+    {
+      db.Tasks.findOne({
+        where :{id: req.params.id}
+      }).then(function(result) {
+        console.log(result.dataValues);
+        const p=result.dataValues.TaskPoints;
+        const Cid=result.dataValues.ChildId;
+        db.Child.update(
+          {ChildPointsEarned:db.Sequelize.literal(`ChildPointsEarned +`+p)},//sequelize.literal('field + 2')
+          {where:{  id:Cid},
+        }).then(function(res){
+          res.json(res);
+        });
+  }
+  ).then(function(result) {
+      });
+      
+    }
     res.json(result);
   });
 });
@@ -158,7 +168,7 @@ router.route("/api/pendingChores/:parentid/:date").get((req,res)=>{
         TaskStatus:'pending',
       }
       }).then(function(result) {
-        console.log(result);
+        //console.log(result);
         res.json(result);
     });
 });
@@ -173,9 +183,10 @@ router.route("/api/getrewardChild/:childid").get((req,res)=>{
           db.Rewards.findAll({
             where:{
               ParentId:parid,
-            }
+            },
+            order:{RewardPoints:'asc'},
            }).then(function(result) {
-              console.log(result);
+              //console.log(result);
               res.json(result);
             });
         });
@@ -239,7 +250,7 @@ router.route("/api/setpoints/:childid/:points:/:credit").get((req,res)=>{
   })
   .then(function(results){
     console.log("points updated")
-    console.log(results);
+    //console.log(results);
   })
   
 });

@@ -22,14 +22,28 @@ class Parent extends Component {
     
 
     componentDidMount(){
+        this.isLoggedIn();
         this.loadKids();
-       
+        this.loadPendingChores(new Date())
         this.loadRewards();
     };
 
+    isLoggedIn=()=>
+    {
+        if(sessionStorage.getItem("parentid")==="")
+        {   
+            console.log("not Logged in");
+            window.location='/';
+        }
+        else
+        {
+            console.log("Parent "+sessionStorage.getItem("parentid"));
+        }
+    };
+
     onChange = date => {
-        this.setState({ date });
-         this.loadPendingChores();
+        this.setState({date: date });
+         this.loadPendingChores(date);
     };
 
 
@@ -42,10 +56,10 @@ class Parent extends Component {
         .catch(err => console.log(err));
     };
 
-    loadPendingChores=()=>{
-        API.pendingChores(sessionStorage.getItem("parentid"),this.state.date).then(res=>{
+    loadPendingChores=(date)=>{
+        API.pendingChores(sessionStorage.getItem("parentid"),date).then(res=>{
             console.log(res.data);
-            console.log("this.setState({this.state.chores:res});")
+            this.setState({chores:res.data});
         });
     };
 
@@ -102,6 +116,14 @@ class Parent extends Component {
              console.log("done")
             });
      };
+
+     handleApproveChore=event=>{
+         console.log(event.target.id);
+         API.markTask(event.target.id,"done").then((res)=>{
+             this.loadPendingChores(this.state.date);
+             console.log(res)
+            });
+     }
       
     render() {
     return (
@@ -150,7 +172,7 @@ class Parent extends Component {
         {this.state.chores.length ? (
             <div>
             {this.state.chores.map(chore=>
-            <Chore key={chore.taskName} roleClick="confirm" handleStatus={this.handleChoreStatus} title={chore.taskName} status={chore.RedeemStatus} />
+            <Chore key={chore.id} roleClick="confirm" handleStatus={this.handleChoreStatus} who="parent" choreid={chore.id} handleDeleteChore={this.handleDeleteChore} handleApproveChore={this.handleApproveChore} title={chore.TaskName} points={chore.TaskPoints} status={chore.TaskStatus} />
             )}
             </div>
         ):(

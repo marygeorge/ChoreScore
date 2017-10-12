@@ -24,6 +24,7 @@ export default {
     pendingChores:function(parentid,date){ //find chores with status =pending for a particular day
       return axios.get(" /api/pendingChores/"+parentid+"/"+date);
     },
+    
     getChildChores:function(childid,date){ // find a child's chores for the day
       return axios.get("/api/gettasks/"+childid+"/"+date);
     },

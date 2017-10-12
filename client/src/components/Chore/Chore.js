@@ -18,8 +18,11 @@ export const  Chore=props=>
       ):(
         <div>
         {/*parent page need only this */}
-        {props.roleClick=="confirm"? <input type="image" value="deny" onClick={props.handleDeleteChore} id={props.choreid} src = "/assets/redX.png" alt="red X" />:""}
-        </div>
+        {
+         props.status=="pending"? <input type="image" value="deny" onClick={props.handleApproveChore} id={props.choreid} src = "/assets/yellowCheck.png" alt="yellow X" />:
+          <input type="image" value="deny" onClick={props.handleDeleteChore} id={props.choreid} src = "/assets/redX.png" alt="red X" />
+        }
+         </div>
       )}
     </div>
   </div>

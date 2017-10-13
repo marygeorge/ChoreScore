@@ -34,10 +34,15 @@ class Parent extends Component {
     isLoggedIn=()=>
     {
         
-        if(sessionStorage.getItem("parentid")==="")
+        if(sessionStorage.getItem("parentid"))
         {   
+            console.log("session id -parent " +sessionStorage.getItem("parentid"));
+        }
+        else
+        {
             console.log("not Logged in");
             window.location='/';
+            
         }
         
     };
@@ -124,7 +129,12 @@ class Parent extends Component {
              this.loadPendingChores(this.state.date);
             //  console.log(res)
             });
-     }
+     };
+     logout=()=>{
+        sessionStorage.clear();
+        console.log("AFTER clear() session id -parent " +sessionStorage.getItem("parentid"));
+        window.location='/';
+     };
       
     render() {
     return (
@@ -135,9 +145,17 @@ class Parent extends Component {
         <img className="logo" src = "assets/logo.png" alt= "logo" />
         <span className="chore">ChoreScore</span>  
         </div>
-        <div className="col-sm-6">
+        <div className="col-sm-5">
          <KidDropDown addKid="true" kids={this.state.kids} key={this.state.kids.id} handleKidChange={this.handleKidChange}  />
-       </div>
+        </div>
+        <div className="col-sm-1 pull-right ">
+            <button onClick={this.logout} className="logout">
+              Log Out
+             {/*<img src = "/assets/addChoresBtn.png" alt="add chores button" />*/}
+             </button> 
+        </div>
+
+
         </div>
 
         </div>

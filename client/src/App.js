@@ -8,6 +8,8 @@ import AddReward from "./pages/Parent/AddReward.js";
 import ChildPage from "./pages/Parent/ChildPage.js";
 import './App.css';
 
+
+
 class App extends Component {
   render() {
     return (

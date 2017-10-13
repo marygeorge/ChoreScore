@@ -72,7 +72,7 @@ class Child extends Component {
             <div className="navbar">
             <div className="row">
             <div className="col-sm-12">
-            <img className="logo" src = "assets/logo.png" alt= "logo" />
+            <img className="logo" src = "/assets/logo.png" alt= "logo" />
             <span className="chore">ChoreScore</span>  
             </div>
             </div>

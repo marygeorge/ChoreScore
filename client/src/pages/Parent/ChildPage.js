@@ -10,10 +10,7 @@ import { Link } from "react-router-dom";
 import Calendar from 'react-calendar';
 import {AddForm} from "../../components/Chore/AddForm.js";
 
-//datepicker
-import DatePicker from 'react-datepicker';
-import moment from 'moment';
-import 'react-datepicker/dist/react-datepicker.css';
+
 
 class ChildPage extends Component {
     state = {
@@ -137,7 +134,8 @@ class ChildPage extends Component {
         <div className="navbar">
             <div className="row">
                 <div className="col-sm-6">
-                    <img className="logo" src = "assets/logo.png" alt= "logo" />
+                    <img className="logo" src = "/assets/logo.png" alt= "logo" />
+                    {/*<img className="logo" src = "assets/logo.png" alt= "logo" />*/}
                     <span className="chore">ChoreScore</span>
                 </div>
                 <div className="col-sm-6">

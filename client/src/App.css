@@ -65,3 +65,10 @@ li .text-add-kid-btn{
   padding:0px 0px 0px 15px;
 }
 
+.logout{
+  background-color: transparent;
+  border-color: transparent;
+  color:#c2e8fb;
+  font-size: 1.2em;
+}
+

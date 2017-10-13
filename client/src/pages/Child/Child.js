@@ -59,7 +59,11 @@ class Child extends Component {
     
     handleChoreStatus=(event)=>{
         console.log(event.target.id);
-        API.markTask(event.target.id,"pending").then(res=>{
+        const year = this.state.date.getFullYear();
+        const month =this.state.date.getMonth()+1;
+        const day = this.state.date.getDate();
+        const dateString = `${year}-${month}-${day}`; 
+        API.markTask(event.target.id,"pending",dateString).then(res=>{
             console.log(res);
             console.log("done");
             this.loadChores(this.state.date)
@@ -76,9 +80,12 @@ class Child extends Component {
         <div>
             <div className="navbar">
             <div className="row">
-            <div className="col-sm-11">
+            <div className="col-sm-5">
             <img className="logo" src = "/assets/logo.png" alt= "logo" />
             <span className="chore">ChoreScore</span>  
+            </div>
+            <div className="col-sm-2">
+                <h2 className="childNameHead">{this.state.child.ChildName}</h2>
             </div>
             <div className="col-sm-1 pull-right ">
                     <button onClick={this.logout} className="logout">
@@ -103,7 +110,7 @@ class Child extends Component {
 
                   <div className="reward-list">
                {this.state.rewards.map(reward=>
-                <Reward role="child" title={reward.RewardName} points={reward.RewardPoints} />
+                <Reward key={reward.id} role="child" title={reward.RewardName} points={reward.RewardPoints} />
                 )}
                 <div className="link-btn text-center"> 
                  
@@ -126,7 +133,7 @@ class Child extends Component {
                    <div className="col-sm-12 circle-progress-bar">
                    
                        {this.state.rewards.map(reward=>
-                       <Circle totalPoint={this.state.child.ChildPointsEarned} rewardPoint={reward.RewardPoints} rewardName={reward.RewardName}  />
+                       <Circle key={reward.id} totalPoint={this.state.child.ChildPointsEarned} rewardPoint={reward.RewardPoints} rewardName={reward.RewardName}  />
                     )}
                      
                    </div> 

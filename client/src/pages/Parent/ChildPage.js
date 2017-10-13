@@ -101,6 +101,11 @@ class ChildPage extends Component {
      };
    
     handleSubmit=()=>{
+        const d=new Date(this.state.startdate);
+        const Eyear = d.getFullYear();
+        const Emonth =d.getMonth()+1;
+        const Eday = d.getDate();
+        const EdateString = `${Eyear+1}-${Emonth}-${Eday}`; 
        const chore={
        ParentId:sessionStorage.getItem("parentid"),
        ChildId:this.state.selectedKidid,
@@ -108,6 +113,7 @@ class ChildPage extends Component {
        TaskDescription:this.state.choreDesc,
        TaskPoints:this.state.chorePoint,
        StartDate:this.state.startdate,
+       EndDate:EdateString,
        TaskType:this.state.choretype,
        Mandatory:0,
        TaskStatus:"not done"
@@ -172,7 +178,7 @@ class ChildPage extends Component {
             <div>
                 <h3> Chores for {this.state.selDate.toString().substr(4,11)}</h3>
             {this.state.chores.map(chore=>
-            <Chore key={chore.id} roleClick="confirm" handleStatus={this.handleChoreStatus} who="parent" choreid={chore.id} handleDeleteChore={this.handleDeleteChore} title={chore.TaskName} points={chore.TaskPoints} status={chore.TaskStatus} />
+            <Chore key={chore.id} roleClick="confirm" page="parentchild" handleStatus={this.handleChoreStatus} who="parent" choreid={chore.id} handleDeleteChore={this.handleDeleteChore} title={chore.TaskName} points={chore.TaskPoints} status={chore.TaskStatus} />
             )}
             </div>
         ):(

@@ -63,7 +63,11 @@ class Parent extends Component {
     };
 
     loadPendingChores=(date)=>{
-        API.pendingChores(sessionStorage.getItem("parentid"),date).then(res=>{
+        const year = date.getFullYear();
+        const month =date.getMonth()+1;
+        const day = date.getDate();
+        const dateString = `${year}-${month}-${day}`; 
+        API.pendingChores(sessionStorage.getItem("parentid"),dateString).then(res=>{
             console.log("pending chores for "+date);
             this.setState({chores:res.data});
         });
@@ -191,7 +195,7 @@ class Parent extends Component {
         {this.state.chores.length ? (
             <div>
             {this.state.chores.map(chore=>
-            <Chore key={chore.id} roleClick="confirm" handleStatus={this.handleChoreStatus} who="parent" choreid={chore.id} handleDeleteChore={this.handleDeleteChore} handleApproveChore={this.handleApproveChore} title={chore.TaskName} points={chore.TaskPoints} status={chore.TaskStatus} />
+            <Chore key={chore.id} roleClick="confirm" page="parent" handleStatus={this.handleChoreStatus} who="parent" choreid={chore.id} handleDeleteChore={this.handleDeleteChore} handleApproveChore={this.handleApproveChore} title={chore.TaskName} points={chore.TaskPoints} status={chore.TaskStatus} />
             )}
             </div>
         ):(

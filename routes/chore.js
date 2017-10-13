@@ -99,13 +99,21 @@ console.log("delete chore*************************");
   });
 });
 //set Task status 
-router.route("/api/markTask/:id/:status").post((req,res)=>{
+router.route("/api/markTask/:id/:status/:date").post((req,res)=>{
   console.log(req.params.id+ " updated to "+ req.params.status);
-  db.Tasks.update(
-    {TaskStatus:req.params.status},
-    {where:{  id:req.params.id},
-  }
-  ).then(function(result) {
+  // db.Tasks.update(
+  //   {TaskStatus:req.params.status},
+  //   {where:{  id:req.params.id},
+  // }
+  //updateTaskStatus
+ db.sequelize.query(`call updateTaskStatus(:taskid, :status, :date)`,{
+    replacements:{
+      taskid:req.params.id,
+      status:req.params.status,
+      date:req.params.date,
+    }
+  }).then(function(result) {
+
     if (req.params.status==="done")// if a task is being marked 'done' the ChildPintsEarned should be incremented by TaskPoints
     {
       db.Tasks.findOne({
@@ -123,7 +131,6 @@ router.route("/api/markTask/:id/:status").post((req,res)=>{
   }
   ).then(function(result) {
       });
-      
     }
     res.json(result);
   });
@@ -161,13 +168,19 @@ router.route("/api/delreward/:id").post((req,res)=>{
 //get pending chore for the day
 router.route("/api/pendingChores/:parentid/:date").get((req,res)=>{ 
   console.log(req.params.childid);
-    db.Tasks.findAll({
-      where:{
-        ParentId:req.params.parentid,
-        StartDate:req.params.date,
-        TaskStatus:'pending',
-      }
-      }).then(function(result) {
+    // db.Tasks.findAll({
+    //   where:{
+    //     ParentId:req.params.parentid,
+    //     StartDate:req.params.date,
+    //     TaskStatus:'pending',
+    //   }
+    //   })
+    db.sequelize.query(`call pendingTasks(:parentid, :date)`,{
+    replacements:{
+      parentid:req.params.parentid,
+      date:req.params.date,
+    }
+  }).then(function(result) {
         //console.log(result);
         res.json(result);
     });

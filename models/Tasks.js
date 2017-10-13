@@ -22,6 +22,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.DATE,
             allowNull: false,
         },
+        EndDate: {
+            type: DataTypes.DATE,
+            allowNull: false,
+        },
         TaskType: {
             type: DataTypes.STRING,
             allowNull: false,

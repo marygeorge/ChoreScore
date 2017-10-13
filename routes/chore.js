@@ -225,18 +225,26 @@ router.route("/api/childlist/:parentid").get((req,res)=>{
 //*******************************************************************************/
 //tasks for each child each day
 router.route("/api/gettasks/:childid/:day").get((req,res)=>{ 
-  console.log(req.params.day);
-   db.Tasks.findAll({
-      where:{
-        ChildId:req.params.childid,
-        StartDate: { gte: req.params.day + ' 00:00' },
-        StartDate: { lte: req.params.day + ' 23:59' }
-      }
-      }).then(function(result) {
-        //console.log(result);
-        res.json(result);
-        // res.redirect("/childpage");
-      });
+  //console.log(db.Sequelize);
+  db.sequelize.query(`call getTasks(:childid, :date)`,{
+    replacements:{
+      childid:req.params.childid,
+      date:req.params.day,
+    }
+  }).then(function(results){
+    res.json(results);
+  });
+  //  db.Tasks.findAll({
+  //     where:{
+  //       ChildId:req.params.childid,
+  //       StartDate: { gte: req.params.day + ' 00:00' },
+  //       StartDate: { lte: req.params.day + ' 23:59' }
+  //     }
+  //     }).then(function(result) {
+  //       //console.log(result);
+  //       res.json(result);
+  //       // res.redirect("/childpage");
+  //     });
 });
 
 //set points for child

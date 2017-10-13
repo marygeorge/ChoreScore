@@ -64,17 +64,27 @@ class Child extends Component {
             console.log("done");
             this.loadChores(this.state.date)
         });
-    }
+    };
+    logout=()=>{
+        sessionStorage.clear();
+        console.log("AFTER clear() session id -parent " +sessionStorage.getItem("parentid"));
+        window.location='/';
+     };
 
     render() {
     return (
         <div>
             <div className="navbar">
             <div className="row">
-            <div className="col-sm-12">
+            <div className="col-sm-11">
             <img className="logo" src = "/assets/logo.png" alt= "logo" />
             <span className="chore">ChoreScore</span>  
             </div>
+            <div className="col-sm-1 pull-right ">
+                    <button onClick={this.logout} className="logout">
+                    Log Out
+                    </button> 
+                </div>
             </div>
             </div>
             <div className="row">

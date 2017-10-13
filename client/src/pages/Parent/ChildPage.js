@@ -126,6 +126,11 @@ class ChildPage extends Component {
             this.loadChores(this.state.selDate);
         });
     };
+    logout=()=>{
+        sessionStorage.clear();
+        console.log("AFTER clear() session id -parent " +sessionStorage.getItem("parentid"));
+        window.location='/';
+     };
 
 
     render() {
@@ -138,9 +143,15 @@ class ChildPage extends Component {
                     {/*<img className="logo" src = "assets/logo.png" alt= "logo" />*/}
                     <span className="chore">ChoreScore</span>
                 </div>
-                <div className="col-sm-6">
+                <div className="col-sm-5">
                     <KidDropDown addKid="true" kids={this.state.kids} handleKidChange={this.handleKidChange}  />
                 </div>
+                <div className="col-sm-1 pull-right ">
+                    <button onClick={this.logout} className="logout">
+                    Log Out
+                    </button> 
+                </div>
+
             </div>
         </div>
         <div className="text-center"> <h2> {this.state.selectedKidName} </h2></div>
